@@ -1,9 +1,7 @@
-# create-my-template
+# Create Anura App
 
-Example project to showcase how to build your own `create-my-template` npx starter template.
+This is a template for creating a new Anura app.
 
 ```bash
-$ npx create-my-template my-app
+$ npx create-anura-app
 ```
-
-[Read my article on how this works](https://petermekhaeil.com/how-to-build-an-npx-starter-template/).
