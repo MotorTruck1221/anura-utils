@@ -1,5 +1,5 @@
 {
-  "name": "create-anura.app",
+  "name": "create-anura-app",
   "version": "1.0.0",
   "description": "Tool to initialize an anura application",
   "bin": {
