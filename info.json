@@ -1,0 +1,36 @@
+{
+  "template": {
+    "name": "project-name",
+    "version": "1.0.0",
+    "scripts": {
+      "build": "REPLACE_ON_CREATE",
+      "package": "REPLACE_ON_CREATE"
+    },
+    "author": "REPLACE_ON_CREATE",
+    "license": "REPLACE_ON_CREATE",
+    "dependencies": {
+      "archiver": "^6.0.1"
+    }
+  },
+  "overrides": {
+    "javascript": {
+      "scripts": {
+        "build": null,
+        "package": "node package.js"
+      }
+    },
+    "typescript": {
+      "scripts": {
+        "build": "tsc; globstar -- cp -r public/**/* build/",
+        "package": "npm run build && node package.js"
+      },
+      "devDependencies": {
+        "globstar": "^1.0.0",
+        "typescript": "^5.3.3"
+      }
+    },
+    "assemblyscript": {
+      "WARNING": "AssemblyScript projects are not supported yet. Support is coming soon!"
+    }
+  }
+}

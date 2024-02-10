@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowUnreachableCode": false,
+    "alwaysStrict": true,
+    "checkJs": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "YOU_CANT_USE_FRAGMENTS",
+    "module": "ESNext",
+    "lib": ["ESNext", "dom"],
+    "moduleResolution": "Bundler",
+    "noImplicitAny": true,
+    "noUncheckedIndexedAccess": true,
+    "outDir": "build/dist",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "sourceRoot": "./dist",
+    "strictNullChecks": true,
+    "target": "ESNext",
+    "types": ["@mercuryworkshop/alicejs"]
+  },
+  "exclude": ["/**/node_modules/**/*"],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
+}
