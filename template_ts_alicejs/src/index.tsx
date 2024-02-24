@@ -1,18 +1,29 @@
-function App(this: { browser: any; url: string }) {
+function App(this: { picker: any; files?: string[] }) {
+  this.files ??= [];
   return (
     <div>
       <h1>Anura TypeScript Example</h1>
-      <button on:click={() => this.browser.openTab(this.url)}>
-        Open <a href={this.url}>Google</a>
+      <button
+        on:click={() => {
+          this.picker.selectFile().then((files: string | string[]) => {
+            this.files = Array.isArray(files) ? files : [files];
+          });
+        }}
+      >
+        {use(
+          this.files,
+          (files: string[]) =>
+            "Files: " +
+            files.length +
+            (files.length > 0 ? ` (${files.join(", ")})` : "")
+        )}
       </button>
     </div>
   );
 }
 
 window.addEventListener("load", () => {
-  anura.import("anura.libbrowser").then((browser: any) => {
-    document.body.appendChild(
-      <App browser={browser} url="https://www.google.com/" />
-    );
+  anura.import("anura.filepicker").then((picker: any) => {
+    document.body.appendChild(<App picker={picker} />);
   });
 });

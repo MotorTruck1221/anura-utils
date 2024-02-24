@@ -4,29 +4,36 @@
     "version": "1.0.0",
     "scripts": {
       "build": "REPLACE_ON_CREATE",
-      "package": "REPLACE_ON_CREATE"
+      "package": "REPLACE_ON_CREATE",
+      "start": "REPLACE_ON_CREATE"
     },
     "author": "REPLACE_ON_CREATE",
     "license": "REPLACE_ON_CREATE",
     "dependencies": {
       "archiver": "^6.0.1"
+    },
+    "devDependencies": {
+      "express": "^4.18.2"
     }
   },
   "overrides": {
     "javascript": {
       "scripts": {
         "build": null,
-        "package": "node package.js"
+        "package": "node package.js",
+        "start": "node server.js"
       }
     },
     "typescript": {
       "scripts": {
         "build": "tsc; globstar -- cp -r public/**/* build/",
-        "package": "npm run build && node package.js"
+        "package": "npm run build && node package.js",
+        "start": "node server.js"
       },
       "devDependencies": {
         "globstar": "^1.0.0",
-        "typescript": "^5.3.3"
+        "typescript": "^5.3.3",
+        "express": "^4.18.2"
       }
     },
     "assemblyscript": {
