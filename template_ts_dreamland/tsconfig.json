@@ -6,9 +6,9 @@
     "checkJs": true,
     "declaration": true,
     "esModuleInterop": true,
-    "jsx": "react",
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "YOU_CANT_USE_FRAGMENTS",
+    "jsx":"react",
+    "jsxFactory":"h",
+    "jsxFragmentFactory":"Fragment",
     "module": "ESNext",
     "lib": ["ESNext", "dom"],
     "moduleResolution": "Bundler",
@@ -20,7 +20,7 @@
     "sourceRoot": "./dist",
     "strictNullChecks": true,
     "target": "ESNext",
-    "types": ["@mercuryworkshop/alicejs"]
+    "types": ["dreamland"]
   },
   "exclude": ["/**/node_modules/**/*"],
   "include": ["./src/**/*.ts", "./src/**/*.tsx"]

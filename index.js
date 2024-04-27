@@ -46,15 +46,15 @@ if (!["typescript", "javascript", "assemblyscript"].includes(type)) {
 
 if (!framework) {
   console.log("No framework provided.");
-  framework = await rl.question("Enter a framework: (alicejs|none) ");
+  framework = await rl.question("Enter a framework: (dreamland|none) ");
 }
 
-if (type === "javascript" && framework === "alicejs") {
-  console.log("AliceJS is not supported for javascript projects.");
+if (type === "javascript" && framework === "dreamland") {
+  console.log("Dreamland is not supported for javascript projects.");
   console.log("defaulting to none");
   framework = "none";
 }
-if (!["alicejs", "none"].includes(framework)) {
+if (!["dreamland", "none"].includes(framework)) {
   console.log("Invalid framework.");
   console.log("defaulting to none");
   framework = "none";
@@ -124,9 +124,9 @@ Object.assign(template, {
   description: `A new ${type} anura app`,
 });
 
-if (framework === "alicejs") {
-  template.dependencies["@mercuryworkshop/alicejs"] = "^2.1.1";
-  template.description += " using alicejs (dreamland)";
+if (framework === "dreamland") {
+  template.dependencies["dreamland"] = "^0.0.14-patch";
+  template.description += " using dreamland";
 }
 
 // Merge the template and overrides
