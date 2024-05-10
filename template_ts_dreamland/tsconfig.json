@@ -1,25 +1,27 @@
 {
   "compilerOptions": {
-    "allowJs": true,
-    "allowUnreachableCode": false,
-    "alwaysStrict": true,
-    "checkJs": true,
-    "declaration": true,
-    "esModuleInterop": true,
-    "jsx":"react",
-    "jsxFactory":"h",
-    "jsxFragmentFactory":"Fragment",
+    "target": "ES2020",
+    "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ESNext", "dom"],
-    "moduleResolution": "Bundler",
-    "noImplicitAny": true,
-    "noUncheckedIndexedAccess": true,
-    "outDir": "build/dist",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-    "sourceMap": true,
-    "sourceRoot": "./dist",
-    "strictNullChecks": true,
-    "target": "ESNext",
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    "jsx": "react",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     "types": ["dreamland"]
   },
   "exclude": ["/**/node_modules/**/*"],

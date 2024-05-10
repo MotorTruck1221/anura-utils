@@ -125,7 +125,7 @@ Object.assign(template, {
 });
 
 if (framework === "dreamland") {
-  template.dependencies["dreamland"] = "^0.0.14-patch";
+  template.dependencies["dreamland"] = "^0.0.17";
   template.description += " using dreamland";
 }
 
