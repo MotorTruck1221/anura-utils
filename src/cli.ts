@@ -42,7 +42,7 @@ async function project() {
     program.argument("[dir]", "The name of the project, and the directory to create");
     program.option("--git", "Init a Git repository", false);
     program.option("-i, --install", "Automatically install the dependencies", false);
-    program.option("-y, --default", "Skip any questions and bootstrap with defaults", false);
+    program.option("-y, --default", "Skip everything and bootstrap with defaults", false);
     program.option("-p, --projectType <ts|js|assemblyscript>", "The project type", "ts");
     program.option("-d, --dreamland", "Whether to use dreamland.js or not", false);
     program.option("-a, --author <author>", "The author's name", "");
@@ -53,7 +53,15 @@ async function project() {
     }
     cliResults.flags = program.opts();
     program.parse(process.argv);
-    console.log(cliResults);
+
+    //skip everything and scaffold with defaults (TODO: write scaffold code)
+    if (cliResults.flags.default) {
+        const defaultSpinner = prompt.spinner();
+        defaultSpinner.start();
+        defaultSpinner.message(chalk.yellow('Scaffold using all default options'));
+        defaultSpinner.stop(chalk.green.bold('Scaffold complete'));
+        return prompt.note(`cd ${providedName ?? "anura-app"} \nnpm i \nnpm run dev`, chalk.bold.blue('Done Creating. Now Run:'));
+    }        
 }
 
 async function cli() {
