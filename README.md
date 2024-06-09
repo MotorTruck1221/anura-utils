@@ -36,37 +36,44 @@ pnpm dlx create-anura-app@latest
 
 - `[dir]` - Skip the project name questions
     - Usage: `npx create-anura-app@latest newProject`
+
 <br>
-<br>
+
 - `--git` - Explicitly tell the CLI to init a Git repo
     - Usage: `npx create-anura-app@latest --git`
+
 <br>
-<br>
+
 - `--install, -i` - Explicitly tell the CLI to install dependencies
     - Usage: `npx create-anura-app@latest --install`
     - `npx create-anura-app@latest -i`
+
 <br>
-<br>
+
 - `--default, -y` - Scaffold a project with all defaults.
     - Usage: `npx create-anura-app@latest --default`
     - `npx create-anura-app@latest -y`
+
 <br>
-<br>
+
 - `--projectType <ts|js|assemblyscript>, -p <ts|js|assemblyscript>` - Select the type of project you want to use
     - Usage: `npx create-anura-app@latest --projectType js`
     - `npx create-anura-app@latest -p assemblyscript`
+
 <br>
-<br>
+
 - `--dreamland, -d` - Whether to use dreamland or not
     - Usage: `npx create-anura-app@latest --dreamland`
     - `npx create-anura-app@latest -d`
+
 <br>
-<br>
+
 - `--author <author>, -a <author>` - The authors name
     - Usage: `npx create-anura-app@latest --author motortruck1221`
     - `npx create-anura-app@latest -a motortruck1221`
+
 <br>
-<br>
+
 - `--license <license>, -l <license>` - The license you want to use
     - Usage: `npx create-anura-app@latest --license MIT`
     - `npx create-anura-app@latest -l MIT`
