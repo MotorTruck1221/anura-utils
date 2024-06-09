@@ -3,50 +3,49 @@ import chalk from 'chalk';
 import { Command } from 'commander';
 import { execa } from 'execa';
 
-type ProjTypes = "ts" | "js" | "assemblyscript"
+type ProjTypes = 'ts' | 'js' | 'assemblyscript';
 
 interface CliFlags {
-    git: boolean,
-    install: boolean,
-    default: boolean,
-    projType: ProjTypes,
-    dreamland?: boolean,
-    author: string,
-    license: string
+    git: boolean;
+    install: boolean;
+    default: boolean;
+    projType: ProjTypes;
+    dreamland?: boolean;
+    author: string;
+    license: string;
 }
 
 interface CliResults {
-    dir: string,
-    flags: CliFlags
+    dir: string;
+    flags: CliFlags;
 }
 
-
 const defaultOpts: CliResults = {
-    dir: "anura-app",
+    dir: 'anura-app',
     flags: {
         git: false,
         install: false,
         default: false,
-        projType: "ts",
+        projType: 'ts',
         dreamland: false,
-        author: "",
-        license: "MIT"
+        author: '',
+        license: 'MIT'
     }
-}
+};
 
 async function project() {
     const cliResults = defaultOpts;
     const program = new Command();
-    program.name("Create Anura App");
-    program.description("Quickly scaffold an anura application");
-    program.argument("[dir]", "The name of the project, and the directory to create");
-    program.option("--git", "Init a Git repository", false);
-    program.option("-i, --install", "Automatically install the dependencies", false);
-    program.option("-y, --default", "Skip everything and bootstrap with defaults", false);
-    program.option("-p, --projectType <ts|js|assemblyscript>", "The project type", "ts");
-    program.option("-d, --dreamland", "Whether to use dreamland.js or not", false);
-    program.option("-a, --author <author>", "The author's name", "");
-    program.option("-l, --license <license>", "The license you want to use", "MIT");
+    program.name('Create Anura App');
+    program.description('Quickly scaffold an anura application');
+    program.argument('[dir]', 'The name of the project, and the directory to create');
+    program.option('--git', 'Init a Git repository', false);
+    program.option('-i, --install', 'Automatically install the dependencies', false);
+    program.option('-y, --default', 'Skip everything and bootstrap with defaults', false);
+    program.option('-p, --projectType <ts|js|assemblyscript>', 'The project type', 'ts');
+    program.option('-d, --dreamland', 'Whether to use dreamland.js or not', false);
+    program.option('-a, --author <author>', "The author's name", '');
+    program.option('-l, --license <license>', 'The license you want to use', 'MIT');
     const providedName = program.args[0];
     if (providedName) {
         cliResults.dir = providedName;
@@ -60,8 +59,11 @@ async function project() {
         defaultSpinner.start();
         defaultSpinner.message(chalk.yellow('Scaffold using all default options'));
         defaultSpinner.stop(chalk.green.bold('Scaffold complete'));
-        return prompt.note(`cd ${providedName ?? "anura-app"} \nnpm i \nnpm run dev`, chalk.bold.blue('Done Creating. Now Run:'));
-    }        
+        return prompt.note(
+            `cd ${providedName ?? 'anura-app'} \nnpm i \nnpm run dev`,
+            chalk.bold.blue('Done Creating. Now Run:')
+        );
+    }
 }
 
 async function cli() {

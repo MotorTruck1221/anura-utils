@@ -11,6 +11,7 @@
       "url": "git+https://github.com/MotorTruck1221/create-anura-app.git"
   },
   "scripts": {
+      "format": "biome format ./ --write && biome check --apply .",
       "types": "tsc --noEmit",
       "build": "npm run types && babel src/ --out-dir dist/ --extensions '.ts' --copy-files",
       "release": "npm publish --access public"
