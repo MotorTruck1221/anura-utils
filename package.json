@@ -38,7 +38,8 @@
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.12.10",
     "typescript": "^5.4.5",
-    "@babel/plugin-syntax-import-attributes": "^7.24.1"
+    "@babel/plugin-syntax-import-attributes": "^7.24.1",
+    "@biomejs/biome": "1.7.3"
   },
   "dependencies": {
     "@clack/core": "^0.3.4",
