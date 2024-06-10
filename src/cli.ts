@@ -64,6 +64,14 @@ async function project() {
             chalk.bold.blue('Done Creating. Now Run:')
         );
     }
+    if (process.env.TERM_PROGRAM?.toLowerCase().includes('mintty')) {
+        console.log(
+            chalk.yellow(
+                'WARNING: It looks like you are using MinTTY which is not interactive. This is most likely because you are using Git Bash. \nIf you are using Git Bash, please use it from another terminal like Windows Terminal. \nOr use flags! '
+            )
+        );
+        throw new Error('Terminal Session is Non-Interactive');
+    }
 }
 
 async function cli() {
