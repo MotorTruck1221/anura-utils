@@ -3,14 +3,12 @@ import chalk from 'chalk';
 import { Command } from 'commander';
 import { execa } from 'execa';
 
-type ProjTypes = 'ts' | 'js' | 'assemblyscript';
-
 interface CliFlags {
     git: boolean;
     install: boolean;
     default: boolean;
-    projType: ProjTypes;
-    dreamland?: boolean;
+    projectType: string;
+    dreamland: boolean;
     author: string;
     license: string;
 }
@@ -26,7 +24,7 @@ const defaultOpts: CliResults = {
         git: false,
         install: false,
         default: false,
-        projType: 'ts',
+        projectType: 'ts',
         dreamland: false,
         author: '',
         license: 'MIT'
@@ -42,16 +40,16 @@ async function project() {
     program.option('--git', 'Init a Git repository', false);
     program.option('-i, --install', 'Automatically install the dependencies', false);
     program.option('-y, --default', 'Skip everything and bootstrap with defaults', false);
-    program.option('-p, --projectType <ts|js|assemblyscript>', 'The project type', 'ts');
+    program.option('-p, --projectType <ts|js|assemblyscript>', 'The project type');
     program.option('-d, --dreamland', 'Whether to use dreamland.js or not', false);
-    program.option('-a, --author <author>', "The author's name", '');
-    program.option('-l, --license <license>', 'The license you want to use', 'MIT');
+    program.option('-a, --author <author>', "The author's name");
+    program.option('-l, --license <license>', 'The license you want to use');
+    program.parse(process.argv);
     const providedName = program.args[0];
     if (providedName) {
         cliResults.dir = providedName;
     }
     cliResults.flags = program.opts();
-    program.parse(process.argv);
 
     //skip everything and scaffold with defaults (TODO: write scaffold code)
     if (cliResults.flags.default) {
@@ -65,13 +63,69 @@ async function project() {
         );
     }
     if (process.env.TERM_PROGRAM?.toLowerCase().includes('mintty')) {
-        console.log(
-            chalk.yellow(
-                'WARNING: It looks like you are using MinTTY which is not interactive. This is most likely because you are using Git Bash. \nIf you are using Git Bash, please use it from another terminal like Windows Terminal. \nOr use flags! '
+        prompt.note(chalk.yellow(
+                'WARNING: It looks like you are using MinTTY which is not interactive. This is most likely because you are using Git Bash. \nIf you are using Git Bash, please use it from another terminal like Windows Terminal. \nOr use -y/--default to use all default options '
             )
-        );
-        throw new Error('Terminal Session is Non-Interactive');
+        )
+        throw new Error();
     }
+    const questions = await prompt.group(
+        {
+            ...(!providedName && {
+                path: () => prompt.text({
+                    message: chalk.blue('Where would you like to create your project?'),
+                    placeholder: 'project-name'
+                }),
+            }),
+            ...(!cliResults.flags.git && {
+                git: () => prompt.confirm({
+                    message: chalk.blueBright('Do you want to create a Git repository?'),
+                    initialValue: false
+                }),
+            }),
+            ...(!cliResults.flags.license && {
+                license: () => prompt.text({
+                    message: chalk.cyan('What is the license you are going to use?'),
+                    placeholder: 'MIT'
+                }),
+            }),
+            ...(!cliResults.flags.author && {
+                author: () => prompt.text({
+                    message: chalk.cyanBright('What is your name?'),
+                    placeholder: 'Billy'
+                }),
+            }),
+            ...(!cliResults.flags.projectType && {
+                projType: () => prompt.select({
+                    message: chalk.magenta('What project type do you want to use?'),
+                    initialValue: 'ts',
+                    maxItems: 3,
+                    options: [
+                        { value: 'ts', label: chalk.bold.blue('TS') },
+                        { value: 'js', label: chalk.bgYellow.bold.black('JS') },
+                        { value: 'assemblyscript', label: 'AssemblyScript' }
+                    ],
+                }),
+            }),
+            ...(!cliResults.flags.install && {
+                install: () => prompt.confirm({
+                    message: chalk.magentaBright('Do you want to automatically install dependencies?'),
+                    initialValue: false 
+                }),
+            }),
+            ...(!cliResults.flags.dreamland && {
+                dreamland: () => prompt.confirm({
+                    message: chalk.green('Do you want to use dreamland.js?'),
+                    initialValue: false,
+                }),
+            })
+        },
+        { 
+            onCancel: () => {
+                prompt.cancel(chalk.red.bold('Operation canceled'));
+                process.exit(0);
+            }
+        })
 }
 
 async function cli() {
