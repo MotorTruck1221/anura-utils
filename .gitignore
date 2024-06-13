@@ -1,3 +1,5 @@
 node_modules
 test_project
 *.log
+~/
+dist/

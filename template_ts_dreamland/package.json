@@ -1,9 +1,0 @@
-{
-  "name": "anura-typescript-app-template",
-  "version": "1.0.0",
-  "description": "AnuraOS TypeScript App - This package.json is here to pacify ts when modifying the template.",
-  "dependencies": {
-    "dreamland": "^0.0.17"
-  },
-  "NOTE": "This package.json must not be present after using the template. If it is, it means the template failed to initialize."
-}
