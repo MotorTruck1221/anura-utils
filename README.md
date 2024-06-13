@@ -56,7 +56,7 @@ pnpm dlx create-anura-app@latest
 
 <br>
 
-- `--projectType <ts|js|assemblyscript>, -p <ts|js|assemblyscript>` - Select the type of project you want to use
+- `--projectType <ts|js>, -p <ts|js>` - Select the type of project you want to use
     - Usage: `npx create-anura-app@latest --projectType js`
     - `npx create-anura-app@latest -p assemblyscript`
 

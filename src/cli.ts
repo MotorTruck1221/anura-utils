@@ -42,7 +42,6 @@ async function project() {
     program.option('-i, --install', 'Automatically install the dependencies', false);
     program.option('-y, --default', 'Skip everything and bootstrap with defaults', false);
     program.option('-p, --projectType <ts|js>', 'The project type');
-    program.option('-pn --projectName <name>', 'The project name');
     program.option('-d, --dreamland', 'Whether to use dreamland.js or not', false);
     program.option('-a, --author <author>', "The author's name");
     program.option('-l, --license <license>', 'The license you want to use');
