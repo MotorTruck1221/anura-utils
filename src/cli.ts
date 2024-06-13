@@ -2,6 +2,7 @@ import * as prompt from '@clack/prompts';
 import chalk from 'chalk';
 import { Command } from 'commander';
 import { execa } from 'execa';
+import { scaffold } from './scaffold.js';
 
 interface CliFlags {
     git: boolean;
@@ -40,7 +41,8 @@ async function project() {
     program.option('--git', 'Init a Git repository', false);
     program.option('-i, --install', 'Automatically install the dependencies', false);
     program.option('-y, --default', 'Skip everything and bootstrap with defaults', false);
-    program.option('-p, --projectType <ts|js|assemblyscript>', 'The project type');
+    program.option('-p, --projectType <ts|js>', 'The project type');
+    program.option('-pn --projectName <name>', 'The project name');
     program.option('-d, --dreamland', 'Whether to use dreamland.js or not', false);
     program.option('-a, --author <author>', "The author's name");
     program.option('-l, --license <license>', 'The license you want to use');
@@ -74,7 +76,7 @@ async function project() {
             ...(!providedName && {
                 path: () => prompt.text({
                     message: chalk.blue('Where would you like to create your project?'),
-                    placeholder: 'project-name'
+                    placeholder: 'anura-app'
                 }),
             }),
             ...(!cliResults.flags.git && {
@@ -99,11 +101,11 @@ async function project() {
                 projType: () => prompt.select({
                     message: chalk.magenta('What project type do you want to use?'),
                     initialValue: 'ts',
-                    maxItems: 3,
+                    maxItems: 2,
                     options: [
                         { value: 'ts', label: chalk.bold.blue('TS') },
                         { value: 'js', label: chalk.bgYellow.bold.black('JS') },
-                        { value: 'assemblyscript', label: 'AssemblyScript' }
+                        //Uncomment when supported: { value: 'assemblyscript', label: 'AssemblyScript' }
                     ],
                 }),
             }),
@@ -126,6 +128,73 @@ async function project() {
                 process.exit(0);
             }
         })
+        let promptToContinue;
+        if (cliResults.flags.dreamland && cliResults.flags.projectType === "js") {
+            prompt.note(chalk.yellow("When using JavaScript dreamland.js is not supported."));
+            promptToContinue = await prompt.group({
+               continue: () => prompt.confirm({
+                   message: chalk.bold.yellow("Do you want to continue?"),
+                   initialValue: true,
+               })
+            },
+            {
+                onCancel: () => {
+                    prompt.cancel("Process Canceled");
+                    process.exit(0);
+                }
+            })
+            if (!promptToContinue.continue) {
+                prompt.cancel(chalk.red("Ok, canceling"));
+                process.exit(0);
+            }
+            else {
+                prompt.note(chalk.green("Ok, ignoring dreamland option"));
+            }
+        }
+        else if (questions.dreamland && questions.projType === "js") {
+            prompt.note(chalk.yellow("When using JS, dreamland.js is not supported"));
+            promptToContinue = await prompt.group({
+                continue: () => prompt.confirm({
+                    message: chalk.yellow.bold("Do you want to continue?"),
+                    initialValue: true,
+                }),
+            },
+            {
+                onCancel: () => {
+                    prompt.cancel(chalk.red("Process canceled"));
+                    process.exit(0);
+                }
+            });
+            if (!promptToContinue.continue) {
+                prompt.cancel(chalk.red("Ok, canceling"));
+                process.exit(0)
+            }
+            else {
+                prompt.note(chalk.green("Ok, ignoring dreamland selection"));
+            }
+        }
+        const spinner = prompt.spinner();
+        spinner.start();
+        spinner.message(chalk.yellow("Scaffolding project"))
+        let dreamland;
+        if (promptToContinue?.continue) {
+            dreamland = false;
+        }
+        else if (cliResults.flags.dreamland) {
+            dreamland = true;
+        }
+        else if (questions.dreamland) {
+            dreamland = true;
+        }
+        else {
+            dreamland = false;
+        }
+        await scaffold({
+            projectName: questions.path ?? cliResults.dir,
+            type: questions.projType ?? cliResults.flags.projectType,
+            dreamland: dreamland
+        })
+        spinner.stop();
 }
 
 async function cli() {
