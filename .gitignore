@@ -1,6 +1,9 @@
-node_modules
+node_modules/
+**/node_modules/**
 test_project
 *.log
 ~/
+**/~/**
 dist/
+**/app.zip
 anuraos/
