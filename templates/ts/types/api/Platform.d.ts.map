@@ -1,0 +1,1 @@
+{"version":3,"file":"Platform.d.ts","sourceRoot":"/artifacts/","sources":["api/Platform.ts"],"names":[],"mappings":";AAAA,cAAM,QAAQ;IACV,IAAI,EAAE,MAAM,CAAC;IACb,UAAU,EAAE,OAAO,CAAC;IAGpB,KAAK,EAAE,QAAQ,CAAC;QACZ,UAAU,EAAE,OAAO,CAAC;KACvB,CAAC,CAEC;;CAwCN"}

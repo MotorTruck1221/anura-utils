@@ -1,0 +1,1 @@
+{"version":3,"file":"Comlink.d.ts","sourceRoot":"/artifacts/","sources":["libs/Vendored/Comlink.tsx"],"names":[],"mappings":"AACA,cAAM,OAAQ,SAAQ,GAAG;IACrB,IAAI,SAA+B;IACnC,OAAO,SAAiB;IACxB,IAAI,SAAa;IAEjB,GAAG,SAAmC;IAEtC,QAAQ,EAAE;QAAE,CAAC,GAAG,EAAE,MAAM,GAAG,GAAG,CAAA;KAAE,CAAM;IACtC,aAAa,SAAW;IAElB,SAAS,CAAC,OAAO,CAAC,EAAE,MAAM,GAAG,OAAO,CAAC,GAAG,CAAC;CAgBlD"}

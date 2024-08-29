@@ -1,0 +1,1 @@
+{"version":3,"file":"NodeFS.d.ts","sourceRoot":"/artifacts/","sources":["libs/NodePolyfills/NodeFS.ts"],"names":[],"mappings":"AAAA,cAAM,MAAO,SAAQ,GAAG;IACpB,IAAI,SAA+B;IACnC,OAAO,SAAa;IACpB,IAAI,SAAqB;IAEzB,QAAQ,EAAE;QAAE,CAAC,GAAG,EAAE,MAAM,GAAG,eAAe,CAAA;KAAE,CAE1C;IACF,aAAa,SAAW;IAElB,SAAS,CAAC,OAAO,EAAE,MAAM,GAAG,OAAO,CAAC,GAAG,CAAC;CAGjD"}

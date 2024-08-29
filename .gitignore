@@ -3,3 +3,4 @@ test_project
 *.log
 ~/
 dist/
+anuraos/

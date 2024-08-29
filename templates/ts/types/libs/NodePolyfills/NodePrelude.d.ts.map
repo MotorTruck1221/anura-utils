@@ -1,0 +1,1 @@
+{"version":3,"file":"NodePrelude.d.ts","sourceRoot":"/artifacts/","sources":["libs/NodePolyfills/NodePrelude.ts"],"names":[],"mappings":"AAEA,cAAM,WAAY,SAAQ,GAAG;IACzB,IAAI,SAA+B;IACnC,OAAO,SAAkB;IACzB,IAAI,SAAkB;IAEtB,QAAQ,EAAE;QAAE,CAAC,GAAG,EAAE,MAAM,GAAG,GAAG,CAAA;KAAE,CAc9B;IACF,aAAa,SAAW;IAElB,SAAS,CAAC,OAAO,EAAE,MAAM,GAAG,OAAO,CAAC,GAAG,CAAC;CAGjD"}

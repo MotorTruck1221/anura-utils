@@ -76,7 +76,7 @@ async function project() {
             ...(!providedName && {
                 path: () =>
                     prompt.text({
-                        message: chalk.blue('Where would you like to create your project?'),
+                        message: chalk.blue('What is the projects name?'),
                         placeholder: 'anura-app'
                     })
             }),
