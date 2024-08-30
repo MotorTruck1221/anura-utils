@@ -7,3 +7,4 @@ test_project
 dist/
 anuraos/
 !**/anura_env/**
+!**/anur_env/
