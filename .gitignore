@@ -6,6 +6,4 @@ test_project
 **/~/**
 dist/
 anuraos/
-**/pnpm-lock.yaml
-**/package-lock.json
-!./pnpm-lock.yaml
+!**/anura_env/**
