@@ -20,9 +20,11 @@ anura:
 	@cp -r anuraos/build/ templates/base/anura_env/
 	@rm -rf templates/base/anura_env/public/x86images/
 	@rm -rf templates/base/anura_env/public/bios/
+	@jq '.apps += ["__mnt"]' templates/base/anura_env/public/config.json > config.json.tmp && mv config.json.tmp templates/base/anura_env/public/config.json
 
 types:
 	@echo "Generating types from Anura..."
 	@cd anuraos && npx tsc -d --emitDeclarationOnly --declarationMap --outDir ../templates/ts/types/
+
 
 default: anura types

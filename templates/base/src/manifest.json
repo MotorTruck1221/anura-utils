@@ -2,7 +2,7 @@
   "name": "anura-app",
   "type": "auto",
   "package": "creator.name",
-  "index": "",
+  "index": "index.html",
   "icon": "",
   "wininfo": {
     "title": "anura-app",

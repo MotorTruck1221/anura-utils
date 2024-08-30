@@ -4,7 +4,6 @@
     "description": "Anura app",
     "type": "module",
     "scripts": {
-        "postinstall": "node setup.js",
         "dev": "",
         "build": "node build.js"
     },
