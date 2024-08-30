@@ -20,8 +20,6 @@ anura:
 	@cp -r anuraos/build/ templates/base/anura_env/
 	@rm -rf templates/base/anura_env/public/x86images/
 	@rm -rf templates/base/anura_env/public/bios/
-	@rm -rf templates/base/anura_env/apps/term.app/
-	@rm -rf templates/base/anura_env/apps/marketplace.app/
 
 types:
 	@echo "Generating types from Anura..."
