@@ -2,3 +2,4 @@
 node_modules/
 ~/
 # We want to avoid pushing this as much as possible (there are quite a few files here no one wants)
+anura_env/
