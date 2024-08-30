@@ -145,7 +145,7 @@ async function project() {
             {
                 continue: () =>
                     prompt.confirm({
-                        message: chalk.bold.yellow('Do you want to continue?'),
+                        message: chalk.bold.yellow('Do you want to continue without it?'),
                         initialValue: true
                     })
             },
@@ -168,7 +168,7 @@ async function project() {
             {
                 continue: () =>
                     prompt.confirm({
-                        message: chalk.yellow.bold('Do you want to continue?'),
+                        message: chalk.yellow.bold('Do you want to continue wihtout it?'),
                         initialValue: true
                     })
             },
@@ -202,7 +202,8 @@ async function project() {
     await scaffold({
         projectName: questions.path ?? cliResults.dir,
         type: questions.projType ?? cliResults.flags.projectType,
-        dreamland: dreamland
+        dreamland: dreamland,
+        license: questions.license ?? cliResults.flags.license
     });
     spinner.stop();
 }

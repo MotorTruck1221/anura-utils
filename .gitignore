@@ -5,5 +5,7 @@ test_project
 ~/
 **/~/**
 dist/
-**/app.zip
 anuraos/
+**/pnpm-lock.yaml
+**/package-lock.json
+!./pnpm-lock.yaml
