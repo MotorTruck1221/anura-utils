@@ -21,7 +21,7 @@ anura:
 	@rm -rf templates/base/anura_env/public/x86images/
 	@rm -rf templates/base/anura_env/public/bios/
 	@jq '.apps += ["__mnt"]' templates/base/anura_env/public/config.json > config.json.tmp && mv config.json.tmp templates/base/anura_env/public/config.json
-	@jq '.defaultsettings.applist += ["mnt"]' templates/base/anura_env/public/config.json > config.json.tmp && mv config.json.tmp templates/base/anura_env/public/config.json
+	@jq '.defaultsettings.applist += ["__mnt"]' templates/base/anura_env/public/config.json > config.json.tmp && mv config.json.tmp templates/base/anura_env/public/config.json
 	@jq 'del(.x86)' templates/base/anura_env/public/config.json > config.json.tmp && mv config.json.tmp templates/base/anura_env/public/config.json
 
 types:

@@ -21,7 +21,7 @@
       "anura.browser",
       "anura.settings",
       "anura.fsapp",
-      "mnt"
+      "__mnt"
     ],
     "clampWindows": true,
     "launcher-keybind": true,
