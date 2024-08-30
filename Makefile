@@ -10,15 +10,15 @@ clean:
 	@rm -rf templates/base/anura_env/
 
 anura:
-	@echo "Building anura & adding the proper assets"
+	@echo "Building anura & adding the proper assets..."
 	@-[ ! -e 'anuraos' ] && git clone -b v2.0 --recursive https://github.com/mercuryworkshop/anuraos
 	@cd anuraos && make all && cd -
 	@rm -rf templates/base/anura_env/
 	@mkdir -p templates/base/anura_env/
 	@cp -r anuraos/public/ templates/base/anura_env/
 	@cp -r anuraos/apps/ templates/base/anura_env/
+	@cp -r anuraos/build/ templates/base/anura_env/
 	@rm -rf templates/base/anura_env/public/x86images/
-	@rm -rf templates/base/anura_env/public/uv/
 	@rm -rf templates/base/anura_env/public/bios/
 
 types:
