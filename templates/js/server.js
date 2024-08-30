@@ -8,4 +8,7 @@ app.use(express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), "
 app.use(express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), "/anura_env/build/")));
 app.use("/apps", express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), "/anura_env/apps/")));
 
-app.listen(port, () => console.log("Listening on port: ", port))
+const server = app.listen(port, () => console.log("Listening on port: ", port))
+server.on("upgrade", (request, socket, head) => {
+    wisp.routeRequest(request, socket, head);
+});
