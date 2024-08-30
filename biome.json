@@ -1,7 +1,13 @@
 {
     "$schema": "https://biomejs.dev/schemas/1.7.3/schema.json",
     "files": {
-        "ignore": ["**/dist/**", ".github/**"],
+        "ignore": [
+            "**/dist/**",
+            ".github/**",
+            "anuraos/**",
+            "templates/base/anura_env/**",
+            "templates/ts/types/**"
+        ],
         "include": ["src/**", "*"]
     },
     "formatter": {

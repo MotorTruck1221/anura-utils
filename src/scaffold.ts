@@ -14,16 +14,22 @@ interface options {
 
 async function template(template: string, name: string, dreamland: boolean, license: string) {
     try {
-        await downloadTemplate(`github:motortruck1221/create-anura-app/templates/base`,
-            { force: false, provider: 'github', cwd: name, dir: '.' }
-        )
-        if (template === "js") {
-            await downloadTemplate(`github:motortruck1221/create-anura-app/templates/${template}`,
-                { force: false, provider: 'github', cwd: name, dir: 'js' }
-            )
+        await downloadTemplate(`github:motortruck1221/create-anura-app/templates/base`, {
+            force: false,
+            provider: 'github',
+            cwd: name,
+            dir: '.'
+        });
+        if (template === 'js') {
+            await downloadTemplate(`github:motortruck1221/create-anura-app/templates/${template}`, {
+                force: false,
+                provider: 'github',
+                cwd: name,
+                dir: 'js'
+            });
             const packageJSON = fs.readJSONSync(`${name}/package.json`);
             //add the "dev" script, edit the name correctly.
-            packageJSON.scripts.dev = "node server.js";
+            packageJSON.scripts.dev = 'node server.js';
             packageJSON.name = name;
             packageJSON.license = license;
             const sortedPackageJSON = sortPackageJson(packageJSON);
@@ -36,7 +42,7 @@ async function template(template: string, name: string, dreamland: boolean, lice
         }
     } catch (err: any) {
         //remove the dir if it's likely to be created by the CLI
-         if (name !== '.' && name !== './' && name.startsWith('../')) {
+        if (name !== '.' && name !== './' && name.startsWith('../')) {
             try {
                 fs.rmdirSync(name);
             } catch (_) {}
