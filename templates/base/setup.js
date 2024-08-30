@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 const manifest = JSON.parse(fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), "src/manifest.json")));
 
 console.log("Creating symlink...");
-fs.symlink(path.join(path.dirname(fileURLToPath(import.meta.url)), "src"), path.join(path.dirname(fileURLToPath(import.meta.url)), `anura_env/${manifest.package}.app`), 'dir', (err) => {
+fs.symlink(path.join(path.dirname(fileURLToPath(import.meta.url)), "src"), path.join(path.dirname(fileURLToPath(import.meta.url)), `anura_env/apps/${manifest.package}.app`), 'dir', (err) => {
     if (err) {
         console.error(err);
     }
