@@ -4,6 +4,7 @@
     "description": "Anura app",
     "type": "module",
     "scripts": {
+        "postinstall": "node setup.js && rimraf setup.js",
         "dev": "",
         "build": "node build.js"
     },
@@ -12,5 +13,8 @@
         "archiver": "^7.0.1",
         "express": "^4.19.2",
         "picocolors": "^1.0.1"
+    },
+    "devDependencies": {
+        "rimraf": "^6.0.1"
     }
 }
