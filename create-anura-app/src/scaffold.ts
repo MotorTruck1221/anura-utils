@@ -85,6 +85,7 @@ async function template(template: string, name: string, dreamland: boolean, lice
             });
             //only move the necessary files
             fs.moveSync(`${name}/ts/server.ts`, `${name}/server.ts`);
+            console.log(dreamland);
             if (!dreamland) {
                 fs.moveSync(`${name}/ts/tsconfig.json`, `${name}/tsconfig.json`);
             }

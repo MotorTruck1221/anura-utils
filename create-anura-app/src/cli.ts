@@ -80,7 +80,7 @@ async function project() {
                         placeholder: 'anura-app'
                     })
             }),
-            ...(!cliResults.flags.git && {
+            ...(cliResults.flags.git === undefined && {
                 git: () =>
                     prompt.confirm({
                         message: chalk.blueBright('Do you want to create a Git repository?'),
@@ -114,7 +114,7 @@ async function project() {
                         ]
                     })
             }),
-            ...(!cliResults.flags.install && {
+            ...(cliResults.flags.install === undefined && {
                 install: () =>
                     prompt.confirm({
                         message: chalk.magentaBright(
@@ -123,7 +123,7 @@ async function project() {
                         initialValue: false
                     })
             }),
-            ...(!cliResults.flags.dreamland && {
+            ...(cliResults.flags.dreamland === undefined && {
                 dreamland: () =>
                     prompt.confirm({
                         message: chalk.green('Do you want to use dreamland.js?'),
