@@ -24,18 +24,21 @@ async function template(template: string, name: string, dreamland: boolean, lice
             )
             const packageJSON = fs.readJSONSync(`${name}/package.json`);
             const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
+            //we need to filter out directory paths and stuff.
+            const newName = name.replace(/^.*[\\\/]/, '');
+            console.log(newName);
             //add the "dev" script, edit the name correctly.
             packageJSON.scripts.dev = "node server.js";
-            packageJSON.name = name;
+            packageJSON.name = newName;
             packageJSON.license = license;
             const sortedPackageJSON = sortPackageJson(packageJSON);
             fs.writeJSONSync(`${name}/package.json`, sortedPackageJSON, {
                 spaces: 2
             });
             //modify the manifest.json file to include the correct information.
-            manifest.name = name;
-            manifest.package = `${author}.${name}`;
-            manifest.wininfo.title = name;
+            manifest.name = newName;
+            manifest.package = `${author}.${newName}`;
+            manifest.wininfo.title = newName;
             fs.writeJSONSync(`${name}/src/manifest.json`, manifest, {
                 spaces: 2
             });
