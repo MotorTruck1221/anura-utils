@@ -25,7 +25,7 @@ async function template(template: string, name: string, dreamland: boolean, lice
             const packageJSON = fs.readJSONSync(`${name}/package.json`);
             const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
             //we need to filter out directory paths and stuff.
-            const newName = name.replace(/^.*[\\\/]/, '');
+            const newName = name.endsWith('/') ? () => {name.slice(0, -1); name.replace(/^.*\/([^/]*)$/, "$1")} : name.replace(/^.*\/([^/]*)$/, "$1");
             console.log(newName);
             //add the "dev" script, edit the name correctly.
             packageJSON.scripts.dev = "node server.js";
