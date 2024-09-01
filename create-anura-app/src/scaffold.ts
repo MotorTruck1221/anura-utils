@@ -38,7 +38,6 @@ async function template(template: string, name: string, dreamland: boolean, lice
             const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
             //we need to filter out directory paths and stuff.
             const newName = filterPath(name);
-            console.log(newName);
             //add the "dev" script, edit the name correctly.
             packageJSON.scripts.dev = "node server.js";
             packageJSON.name = newName;
@@ -62,9 +61,6 @@ async function template(template: string, name: string, dreamland: boolean, lice
             fs.rmSync(`${name}/js/`, { recursive: true });
         }
         if (template === "ts") {
-            await downloadTemplate('github:motortruck1221/create-anura-app/create-anura-app/templates/base', 
-                { force: false, provider: 'github', cwd: name, dir: '.' }
-            );
             const packageJSON = fs.readJSONSync(`${name}/package.json`);
             const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
             const newName = filterPath(name);

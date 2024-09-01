@@ -13,5 +13,6 @@
         "express": "^4.19.2",
         "picocolors": "^1.0.1",
         "wisp-server-node": "^1.1.3"
-    }
+    },
+    "devDependencies": {}
 }
