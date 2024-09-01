@@ -1,0 +1,14 @@
+{
+  "name": "@mercuryworkshop/anura-types",
+  "version": "1.0.0",
+  "description": "Types generated for anuraOS",
+  "scripts": {
+  },
+  "keywords": [
+    "anura",
+    "anuraOS",
+    "types"
+  ],
+  "author": "MotorTruck1221 (https://github.com/motortruck1221)",
+  "license": "MIT"
+}

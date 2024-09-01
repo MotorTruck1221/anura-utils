@@ -5,10 +5,10 @@
             "**/dist/**",
             ".github/**",
             "anuraos/**",
-            "templates/base/anura_env/**",
-            "templates/ts/types/**"
+            "create-anura-app/templates/base/anura_env/**",
+            "create-anura-app/templates/ts/types/**"
         ],
-        "include": ["src/**", "*"]
+        "include": ["create-anura-app/src/**", "*"]
     },
     "formatter": {
         "indentStyle": "space",

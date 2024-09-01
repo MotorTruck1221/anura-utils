@@ -1,0 +1,1 @@
+{"version":3,"file":"WmApi.d.ts","sourceRoot":"/artifacts/","sources":["api/WmApi.ts"],"names":[],"mappings":"AAAA,cAAM,KAAK;IACP,OAAO,EAAE,OAAO,CAAC,QAAQ,CAAC,EAAE,CAAM;IAClC,mBAAmB,UAAS;IAC5B,MAAM,CAAC,GAAG,EAAE,GAAG,EAAE,IAAI,EAAE,MAAM,GAAG,QAAQ;IA2CxC,aAAa,CAAC,IAAI,EAAE,MAAM,GAAG,QAAQ;CA4CxC"}

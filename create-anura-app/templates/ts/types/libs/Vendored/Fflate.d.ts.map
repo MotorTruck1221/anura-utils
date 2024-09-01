@@ -1,0 +1,1 @@
+{"version":3,"file":"Fflate.d.ts","sourceRoot":"/artifacts/","sources":["libs/Vendored/Fflate.tsx"],"names":[],"mappings":"AAAA,cAAM,MAAO,SAAQ,GAAG;IACpB,IAAI,SAA+B;IACnC,OAAO,SAAgB;IACvB,IAAI,SAAY;IAEhB,GAAG,SAA6B;IAEhC,QAAQ,EAAE;QAAE,CAAC,GAAG,EAAE,MAAM,GAAG,GAAG,CAAA;KAAE,CAAM;IACtC,aAAa,SAAW;IAElB,SAAS,CAAC,OAAO,CAAC,EAAE,MAAM,GAAG,OAAO,CAAC,GAAG,CAAC;CAgBlD"}

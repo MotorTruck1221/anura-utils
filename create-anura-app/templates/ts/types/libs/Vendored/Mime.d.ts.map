@@ -1,0 +1,1 @@
+{"version":3,"file":"Mime.d.ts","sourceRoot":"/artifacts/","sources":["libs/Vendored/Mime.tsx"],"names":[],"mappings":"AAAA,cAAM,IAAK,SAAQ,GAAG;IAClB,IAAI,SAA+B;IACnC,OAAO,SAAc;IACrB,IAAI,SAAU;IAEd,GAAG,SAA6B;IAEhC,QAAQ,EAAE;QAAE,CAAC,GAAG,EAAE,MAAM,GAAG,GAAG,CAAA;KAAE,CAAM;IACtC,aAAa,SAAW;IAElB,SAAS,CAAC,OAAO,CAAC,EAAE,MAAM,GAAG,OAAO,CAAC,GAAG,CAAC;CAgBlD"}

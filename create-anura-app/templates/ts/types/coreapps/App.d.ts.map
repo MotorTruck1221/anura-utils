@@ -1,0 +1,1 @@
+{"version":3,"file":"App.d.ts","sourceRoot":"/artifacts/","sources":["coreapps/App.tsx"],"names":[],"mappings":"AAAA,cAAM,GAAG;IACL,IAAI,EAAE,MAAM,CAAC;IACb,OAAO,EAAE,MAAM,CAAC;IAChB,IAAI,EAAE,MAAM,CAAC;IACb;;;OAGG;IACH,MAAM,UAAS;IACf,OAAO,EAAE,QAAQ,EAAE,CAAM;IACzB,IAAI,CAAC,IAAI,GAAE,MAAM,EAAO,GAAG,IAAI;CAClC"}

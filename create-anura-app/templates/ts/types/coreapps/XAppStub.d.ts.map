@@ -1,0 +1,1 @@
+{"version":3,"file":"XAppStub.d.ts","sourceRoot":"/artifacts/","sources":["coreapps/XAppStub.tsx"],"names":[],"mappings":"AAAA,cAAM,QAAS,SAAQ,GAAG;IACtB,OAAO,EAAE,MAAM,CAAC;gBAEZ,IAAI,EAAE,MAAM,EACZ,YAAY,EAAE,MAAM,EACpB,IAAI,EAAE,MAAM,EACZ,OAAO,EAAE,MAAM;IAQb,IAAI;CAIb"}
