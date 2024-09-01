@@ -27,6 +27,6 @@ anura:
 types:
 	@echo "Generating types from Anura..."
 	@cd anuraos && npx tsc -d --emitDeclarationOnly --declarationMap --outDir ../create-anura-app/templates/ts/types/
-	@cd anuraos && npx tsc -d --emitDeclarationOnly --declarationMap --outDir ../anura-types/src/types/
+	@cd anuraos && npx tsc -d --emitDeclarationOnly --declarationMap --outDir ../anura-types/
 
 default: anura types
