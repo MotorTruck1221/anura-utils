@@ -46,6 +46,9 @@ class Settings {
         if (!initial["user-xapps"]) {
             initial["user-xapps"] = [];
         }
+        if (!initial["disable-regedit-warning"]) {
+            initial["disable-regedit-warning"] = false;
+        }
         try {
             const raw = await fs.promises.readFile("/anura_settings.json");
             // This Uint8Array is actuallly a buffer, so JSON.parse can handle it
@@ -63,12 +66,17 @@ class Settings {
         return prop in this.cache;
     }
     async set(prop, val, subprop) {
+        console.debug("Setting " + prop + " to " + val);
         if (subprop) {
             this.cache[prop][subprop] = val;
         }
         else {
             this.cache[prop] = val;
         }
+        this.save();
+    }
+    async save() {
+        console.debug("Saving settings to fs", this.cache);
         await this.fs.promises.writeFile("/anura_settings.json", JSON.stringify(this.cache));
     }
     async remove(prop, subprop) {
@@ -79,7 +87,7 @@ class Settings {
         else {
             delete this.cache[prop];
         }
-        await this.fs.promises.writeFile("/anura_settings.json", JSON.stringify(this.cache));
+        this.save();
     }
 }
 //# sourceMappingURL=Settings.js.map

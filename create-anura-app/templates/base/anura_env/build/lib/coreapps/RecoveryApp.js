@@ -34,13 +34,23 @@ class RecoveryApp extends App {
         }
 
         .recovery-app-content {
-            display: flex;
+            display: grid;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             color: white;
             padding: 1rem;
             gap: 1rem;
+            grid-template-columns: 10em 10em;
+        }
+
+        button {
+            width: 10em;
+        }
+
+        #return {
+            grid-column: span 2;
+            width: 21em;
         }
 
         .recovery-app-content p {
@@ -106,9 +116,12 @@ class RecoveryApp extends App {
                     anura.settings.set("milestone", "__INVALID");
                     anura.dialog.alert("The cache has been invalidated. When you reload the page, the cache will be reinstalled. This requires an internet connection.", "Cache invalidated");
                 } }, "Invalidate Cache"), h("button", { style: "background: #1B5E20; cursor: not-allowed;", class: "matter-button-contained", title: "The cache is disabled, so you cannot invalidate it.", disabled: true }, "Invalidate Cache"))),
-            h("button", { style: "background: #1B5E20", class: "matter-button-contained", title: "Return to normal mode", "on:click": () => {
+            h("button", { style: "background: #1B5E20", class: "matter-button-contained", title: "Open Registry Editor", "on:click": () => {
+                    anura.apps["anura.regedit"].open();
+                } }, "Registry Editor"),
+            h("button", { style: "background: #1B5E20", class: "matter-button-contained", title: "Return to normal mode", id: "return", "on:click": () => {
                     window.location.reload();
-                } }, "Return"))));
+                } }, "Return to normal mode"))));
     constructor() {
         super();
     }

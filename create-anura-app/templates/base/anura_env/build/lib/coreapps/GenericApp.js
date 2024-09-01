@@ -8,7 +8,7 @@ class GenericApp extends App {
         this.package = "anura.generic";
     }
     async open(args = []) {
-        alert("This app is not supposed to be opened as it is a placeholder for other apps.");
+        anura.dialog.alert("This app is not supposed to be opened as it is a placeholder for other apps.");
         return;
     }
 }

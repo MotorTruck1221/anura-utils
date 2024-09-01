@@ -13,6 +13,18 @@ interface options {
     author: string;
 }
 
+function filterPath(path: string) {
+    if (path.endsWith('/')) {
+        let newPath = path.slice(0, -1);
+        newPath = newPath.replace(/^.*\/([^/]*)$/, "$1");
+        return newPath;
+    }
+    else {
+        const newPath = path.replace(/^.*\/([^/]*)$/, "$1");
+        return newPath;
+    }
+}
+
 async function template(template: string, name: string, dreamland: boolean, license: string, author: string) {
     try {
         await downloadTemplate(`github:motortruck1221/create-anura-app/create-anura-app/templates/base`,
@@ -25,7 +37,7 @@ async function template(template: string, name: string, dreamland: boolean, lice
             const packageJSON = fs.readJSONSync(`${name}/package.json`);
             const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
             //we need to filter out directory paths and stuff.
-            const newName = name.endsWith('/') ? () => {name.slice(0, -1); name.replace(/^.*\/([^/]*)$/, "$1")} : name.replace(/^.*\/([^/]*)$/, "$1");
+            const newName = filterPath(name);
             console.log(newName);
             //add the "dev" script, edit the name correctly.
             packageJSON.scripts.dev = "node server.js";
