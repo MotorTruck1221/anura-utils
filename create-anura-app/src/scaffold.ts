@@ -69,7 +69,7 @@ async function template(template: string, name: string, dreamland: boolean, lice
             //add the correct "dev" script and dependencies
             packageJSON.scripts.dev = "npm run build && node dist/server.js";
             packageJSON.scripts.build = "tsc";
-            packageJSON.scripts.package = "node dist/build.js";
+            packageJSON.scripts.package = "node dist/scripts/package.js";
             packageJSON.name = newName;
             packageJSON.license = license;
             packageJSON.devDependencies["typescript"] = "^5.4.5";

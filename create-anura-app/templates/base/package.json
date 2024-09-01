@@ -5,7 +5,7 @@
     "type": "module",
     "scripts": {
         "dev": "",
-        "build": "node build.js"
+        "build": "node scripts/package.js"
     },
     "license": "MIT",
     "dependencies": {
