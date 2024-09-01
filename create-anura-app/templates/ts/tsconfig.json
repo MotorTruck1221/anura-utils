@@ -11,10 +11,10 @@
     "moduleResolution": "Bundler",
     "noImplicitAny": true,
     "noUncheckedIndexedAccess": true,
-    "outDir": "./src/dist",
+    "outDir": "./dist/",
     "skipLibCheck": true,
     "sourceMap": true,
-    "sourceRoot": "./src/dist/",
+    "sourceRoot": "./dist/",
     "strictNullChecks": true,
     "target": "ESNext"
   },

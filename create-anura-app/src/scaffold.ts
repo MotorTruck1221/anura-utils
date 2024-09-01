@@ -17,11 +17,11 @@ function filterPath(path: string) {
     if (path.endsWith('/')) {
         let newPath = path.slice(0, -1);
         newPath = newPath.replace(/^.*\/([^/]*)$/, "$1");
-        return newPath;
+        return newPath.toLowerCase();
     }
     else {
         const newPath = path.replace(/^.*\/([^/]*)$/, "$1");
-        return newPath;
+        return newPath.toLowerCase();
     }
 }
 
@@ -49,7 +49,7 @@ async function template(template: string, name: string, dreamland: boolean, lice
             });
             //modify the manifest.json file to include the correct information.
             manifest.name = newName;
-            manifest.package = `${author}.${newName}`;
+            manifest.package = `${author.toLowerCase()}.${newName}`;
             manifest.wininfo.title = newName;
             fs.writeJSONSync(`${name}/src/manifest.json`, manifest, {
                 spaces: 2
@@ -58,7 +58,33 @@ async function template(template: string, name: string, dreamland: boolean, lice
             fs.moveSync(`${name}/js/server.js`, `${name}/server.js`);
             fs.moveSync(`${name}/js/index.html`, `${name}/src/index.html`);
             fs.moveSync(`${name}/js/example.js`, `${name}/src/example.js`);
+            fs.moveSync(`${name}/js/build.js`, `${name}/build.js`);
             fs.rmSync(`${name}/js/`, { recursive: true });
+        }
+        if (template === "ts") {
+            await downloadTemplate('github:motortruck1221/create-anura-app/create-anura-app/templates/base', 
+                { force: false, provider: 'github', cwd: name, dir: '.' }
+            );
+            const packageJSON = fs.readJSONSync(`${name}/package.json`);
+            const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
+            const newName = filterPath(name);
+            //add the correct "dev" script
+            packageJSON.scripts.dev = "npm run build && node dist/server.js";
+            packageJSON.scripts.build = "tsc";
+            packageJSON.scripts.package = "node dist/build.js";
+            packageJSON.name = newName;
+            packageJSON.license = license;
+            packageJSON.devDependencies["typescript"] = "^5.4.5";
+            const sortedPackageJSON = sortPackageJson(packageJSON);
+            fs.writeJSONSync(`${name}/package.json`, sortedPackageJSON, {
+                spaces: 2
+            });
+            manifest.name = newName;
+            manifest.package = `${author.toLowerCase()}.${newName}`;
+            manifest.wininfo.title = newName;
+            fs.writeJSONSync(`${name}/src/manifest.json`, manifest, {
+                spaces: 2
+            });
         }
     } catch (err: any) {
         //remove the dir if it's likely to be created by the CLI

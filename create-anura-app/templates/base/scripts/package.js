@@ -33,6 +33,8 @@ function build(ts) {
     });
 
     archive.pipe(output);
-    ts === true ? archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), 'src', 'dist'), false) : archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), 'src'), false);
+    ts === true ? archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), 'dist'), false) : archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), 'src'), false);
     archive.finalize();
 }
+
+export { build };
