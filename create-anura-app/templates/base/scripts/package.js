@@ -5,11 +5,11 @@ import archiver from 'archiver';
 import pc from 'picocolors';
 function build(ts) {
     const manifest = JSON.parse(
-        fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), 'src/manifest.json'))
+        fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '../src/manifest.json'))
     );
 
     const output = fs.createWriteStream(
-        path.join(path.dirname(fileURLToPath(import.meta.url)), `${manifest.package}.app.zip`)
+        path.join(path.dirname(fileURLToPath(import.meta.url)), `../${manifest.package}.app.zip`)
     );
     const archive = archiver('zip', {
         zlib: { level: 0 }
@@ -33,7 +33,7 @@ function build(ts) {
     });
 
     archive.pipe(output);
-    ts === true ? archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), 'dist'), false) : archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), 'src'), false);
+    ts === true ? archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), '../dist'), false) : archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), '../src'), false);
     archive.finalize();
 }
 

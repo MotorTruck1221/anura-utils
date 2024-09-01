@@ -61,10 +61,13 @@ async function template(template: string, name: string, dreamland: boolean, lice
             fs.rmSync(`${name}/js/`, { recursive: true });
         }
         if (template === "ts") {
+            await downloadTemplate(`github.com/motortruck1221/create-anura-app/create-anura-app/templates/${template}`, {
+                force: false, provider: 'github', cwd: name, dir: 'ts' 
+            });
             const packageJSON = fs.readJSONSync(`${name}/package.json`);
             const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
             const newName = filterPath(name);
-            //add the correct "dev" script
+            //add the correct "dev" script and dependencies
             packageJSON.scripts.dev = "npm run build && node dist/server.js";
             packageJSON.scripts.build = "tsc";
             packageJSON.scripts.package = "node dist/build.js";
@@ -81,6 +84,13 @@ async function template(template: string, name: string, dreamland: boolean, lice
             fs.writeJSONSync(`${name}/src/manifest.json`, manifest, {
                 spaces: 2
             });
+            //only move the necessary files
+            fs.moveSync(`${name}/ts/build.ts`, `${name}/build.ts`);
+            fs.moveSync(`${name}/ts/server.ts`, `${name}/server.ts`);
+            if (!dreamland) {
+                fs.moveSync(`${name}/ts/tsconfig.json`, `${name}/tsconfig.json`);
+            }
+            fs.rmSync(`${name}/ts/`, { recursive: true });
         }
     } catch (err: any) {
         //remove the dir if it's likely to be created by the CLI
