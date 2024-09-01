@@ -1,0 +1,30 @@
+{
+  "apps": [
+    "apps/term.app",
+    "apps/fsapp.app",
+    "apps/marketplace.app",
+    "apps/ashell.app",
+    "__mnt"
+  ],
+  "libs": [
+    "/apps/libfileview.lib",
+    "/apps/libfilepicker.lib",
+    "/apps/libstore.lib",
+    "/apps/libpersist.lib"
+  ],
+  "bin": [
+    "/bin/chimerix.ajs"
+  ],
+  "defaultsettings": {
+    "use-sw-cache": false,
+    "applist": [
+      "anura.browser",
+      "anura.settings",
+      "anura.fsapp",
+      "__mnt"
+    ],
+    "clampWindows": true,
+    "launcher-keybind": true,
+    "relay-url": "wss://relay.widgetry.org/"
+  }
+}
