@@ -57,7 +57,6 @@ async function template(template: string, name: string, dreamland: boolean, lice
             fs.moveSync(`${name}/js/server.js`, `${name}/server.js`);
             fs.moveSync(`${name}/js/index.html`, `${name}/src/index.html`);
             fs.moveSync(`${name}/js/example.js`, `${name}/src/example.js`);
-            fs.moveSync(`${name}/js/build.js`, `${name}/build.js`);
             fs.rmSync(`${name}/js/`, { recursive: true });
         }
         if (template === "ts") {
@@ -85,7 +84,6 @@ async function template(template: string, name: string, dreamland: boolean, lice
                 spaces: 2
             });
             //only move the necessary files
-            fs.moveSync(`${name}/ts/build.ts`, `${name}/build.ts`);
             fs.moveSync(`${name}/ts/server.ts`, `${name}/server.ts`);
             if (!dreamland) {
                 fs.moveSync(`${name}/ts/tsconfig.json`, `${name}/tsconfig.json`);
