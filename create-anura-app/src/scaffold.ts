@@ -10,18 +10,20 @@ interface options {
     type: string;
     dreamland: boolean;
     license: string;
+    author: string;
 }
 
-async function template(template: string, name: string, dreamland: boolean, license: string) {
+async function template(template: string, name: string, dreamland: boolean, license: string, author: string) {
     try {
-        await downloadTemplate(`github:motortruck1221/create-anura-app/templates/base`,
+        await downloadTemplate(`github:motortruck1221/create-anura-app/create-anura-app/templates/base`,
             { force: false, provider: 'github', cwd: name, dir: '.' }
         )
         if (template === "js") {
-            await downloadTemplate(`github:motortruck1221/create-anura-app/templates/${template}`,
+            await downloadTemplate(`github:motortruck1221/create-anura-app/create-anura-app/templates/${template}`,
                 { force: false, provider: 'github', cwd: name, dir: 'js' }
             )
             const packageJSON = fs.readJSONSync(`${name}/package.json`);
+            const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
             //add the "dev" script, edit the name correctly.
             packageJSON.scripts.dev = "node server.js";
             packageJSON.name = name;
@@ -30,8 +32,17 @@ async function template(template: string, name: string, dreamland: boolean, lice
             fs.writeJSONSync(`${name}/package.json`, sortedPackageJSON, {
                 spaces: 2
             });
-            //move the "server.js" file out of the js folder and remove the js folder
+            //modify the manifest.json file to include the correct information.
+            manifest.name = name;
+            manifest.package = `${author}.${name}`;
+            manifest.wininfo.title = name;
+            fs.writeJSONSync(`${name}/src/manifest.json`, manifest, {
+                spaces: 2
+            });
+            //move the files out of the js folder and into their respective folder and remove the js folder
             fs.moveSync(`${name}/js/server.js`, `${name}/server.js`);
+            fs.moveSync(`${name}/js/index.html`, `${name}/src/index.html`);
+            fs.moveSync(`${name}/js/example.js`, `${name}/src/example.js`);
             fs.rmSync(`${name}/js/`, { recursive: true });
         }
     } catch (err: any) {
@@ -56,7 +67,7 @@ async function template(template: string, name: string, dreamland: boolean, lice
 }
 
 async function scaffold(opts: options) {
-    await template(opts.type, opts.projectName, opts.dreamland, opts.license);
+    await template(opts.type, opts.projectName, opts.dreamland, opts.license, opts.author);
 }
 
 export { scaffold };

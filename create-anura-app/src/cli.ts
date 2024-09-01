@@ -203,7 +203,8 @@ async function project() {
         projectName: questions.path ?? cliResults.dir,
         type: questions.projType ?? cliResults.flags.projectType,
         dreamland: dreamland,
-        license: questions.license ?? cliResults.flags.license
+        license: questions.license ?? cliResults.flags.license,
+        author: questions.author ?? cliResults.flags.author
     });
     spinner.stop();
 }
