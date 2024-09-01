@@ -61,7 +61,7 @@ async function template(template: string, name: string, dreamland: boolean, lice
             fs.rmSync(`${name}/js/`, { recursive: true });
         }
         if (template === "ts") {
-            await downloadTemplate(`github.com/motortruck1221/create-anura-app/create-anura-app/templates/${template}`, {
+            await downloadTemplate(`github:motortruck1221/create-anura-app/create-anura-app/templates/${template}`, {
                 force: false, provider: 'github', cwd: name, dir: 'ts' 
             });
             const packageJSON = fs.readJSONSync(`${name}/package.json`);

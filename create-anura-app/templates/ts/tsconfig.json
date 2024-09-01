@@ -3,7 +3,7 @@
     "allowJs": true,
     "allowUnreachableCode": false,
     "alwaysStrict": true,
-    "checkJs": true,
+    "checkJs": false,
     "declaration": true,
     "esModuleInterop": true,
     "module": "ESNext",
@@ -16,8 +16,9 @@
     "sourceMap": true,
     "sourceRoot": "./dist/",
     "strictNullChecks": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "resolveJsonModule": true
   },
   "exclude": ["/**/node_modules/**/*"],
-  "include": ["./src/**/*.ts"]
+  "include": ["*", "src/**/*.json", "./src/**/*.ts"]
 }

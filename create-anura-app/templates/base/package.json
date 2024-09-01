@@ -14,5 +14,7 @@
         "picocolors": "^1.0.1",
         "wisp-server-node": "^1.1.3"
     },
-    "devDependencies": {}
+    "devDependencies": {
+        "@types/node": "^20.16.2"
+    }
 }
