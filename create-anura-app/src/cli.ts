@@ -6,10 +6,10 @@ import { scaffold } from './scaffold.js';
 
 interface CliFlags {
     git: boolean;
-    install: boolean;
+    install: boolean | undefined;
     default: boolean;
     projectType: string;
-    dreamland: boolean;
+    dreamland: boolean | undefined;
     author: string;
     license: string;
 }
@@ -23,10 +23,10 @@ const defaultOpts: CliResults = {
     dir: 'anura-app',
     flags: {
         git: false,
-        install: false,
+        install: undefined,
         default: false,
         projectType: 'ts',
-        dreamland: false,
+        dreamland: undefined,
         author: '',
         license: 'MIT'
     }
@@ -39,11 +39,11 @@ async function project() {
     program.description('Quickly scaffold an anura application');
     program.argument('[dir]', 'The name of the project, and the directory to create');
     program.option('--git', 'Init a Git repository', false);
-    program.option('-i, --install', 'Automatically install the dependencies', false);
+    program.option('-i, --install', 'Automatically install the dependencies');
     program.option('-y, --default', 'Skip everything and bootstrap with defaults', false);
     program.option('-p, --projectType <ts|js>', 'The project type');
-    program.option('-d, --dreamland', 'Whether to use dreamland.js or not', false);
-    program.option('-a, --author <author>', "The author's name");
+    program.option('-d, --dreamland', 'Whether to use dreamland.js or not');
+    program.option('-a, --author <author>', "The author's name", "billy");
     program.option('-l, --license <license>', 'The license you want to use');
     program.parse(process.argv);
     const providedName = program.args[0];
@@ -51,7 +51,6 @@ async function project() {
         cliResults.dir = providedName;
     }
     cliResults.flags = program.opts();
-
     //skip everything and scaffold with defaults (TODO: write scaffold code)
     if (cliResults.flags.default) {
         const defaultSpinner = prompt.spinner();
@@ -80,7 +79,7 @@ async function project() {
                         placeholder: 'anura-app'
                     })
             }),
-            ...(cliResults.flags.git === undefined && {
+            ...(cliResults.flags.git == undefined && {
                 git: () =>
                     prompt.confirm({
                         message: chalk.blueBright('Do you want to create a Git repository?'),
