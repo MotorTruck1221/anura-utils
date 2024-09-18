@@ -111,6 +111,9 @@ async function template(template: string, name: string, dreamland: boolean, lice
                 fs.moveSync(`${name}/dreamland/index.html`, `${name}/src/index.html`);
             }
             fs.rmSync(`${name}/ts/`, { recursive: true });
+            if (dreamland === true) {
+                fs.rmSync(`${name}/dreamland/`, { recursive: true });
+            }
         }
     } catch (err: any) {
         //remove the dir if it's likely to be created by the CLI

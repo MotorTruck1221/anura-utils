@@ -5,13 +5,12 @@
     "module": "ESNext",
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "skipLibCheck": true,
-
+    "allowJs": true,
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
 
     /* Linting */
     "strict": true,
@@ -23,8 +22,7 @@
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
     "types": ["dreamland"],
-    "resolveJsonModule": true
   },
   "exclude": ["/**/node_modules/**/*"],
-  "include": ["./src/**/*.ts", "./src/**/*.json", "./src/**/*.tsx"]
+  "include": ["*", "./src/**/*.ts", "./src/**/*.json", "./src/**/*.tsx"]
 }
