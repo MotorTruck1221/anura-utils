@@ -13,11 +13,10 @@ jobs:
         with:
           repository: 'mercuryworkshop/anuraos'
           submodules: 'recursive'
-          path: anura
+          ref: 'v2.0'
       - name: Check for new commits
         run: |
           bash
-          cd anura/ && git checkout v2.0
           output=$(git log --since="2 days ago")
           if [[ -n "$output" ]]; then
             echo "new commits! Generating new template files....."
