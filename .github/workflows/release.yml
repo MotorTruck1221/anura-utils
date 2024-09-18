@@ -27,7 +27,7 @@ jobs:
           submodules: recursive
 
       - name: Install other silly deps
-        run: apt update && apt install inotify-tools binaryen wget make gcc uuid-runtime jq
+        run: sudo apt update && sudo apt install inotify-tools binaryen wget make gcc uuid-runtime jq
       
       - name: Setup Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
