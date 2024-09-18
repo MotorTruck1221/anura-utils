@@ -63,16 +63,28 @@ async function template(template: string, name: string, dreamland: boolean, lice
             await downloadTemplate(`github:motortruck1221/create-anura-app/create-anura-app/templates/${template}`, {
                 force: false, provider: 'github', cwd: name, dir: 'ts' 
             });
+            if (dreamland === true) {
+                //download the dreamland template as well if the user selected it.
+                await downloadTemplate(`github:motortruck1221/create-anura-app/create-anura-app/templates/dreamland`, {
+                    force: false, provider: 'github', cwd: name, dir: 'dreamland'
+                });
+            }
             const packageJSON = fs.readJSONSync(`${name}/package.json`);
             const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
             const newName = filterPath(name);
             //add the correct "dev" script and dependencies
             packageJSON.scripts.dev = "npm run build && node dist/server.js";
-            packageJSON.scripts.build = "tsc";
+            packageJSON.scripts.build = "tsc && copyfiles -u 1 src/**/*.html dist/src/";
             packageJSON.scripts.package = "node dist/scripts/package.js";
             packageJSON.name = newName;
             packageJSON.license = license;
             packageJSON.devDependencies["typescript"] = "^5.4.5";
+            packageJSON.devDependencies["@types/express"] = "^4.17.21";
+            packageJSON.devDependencies["copyfiles"] = "^2.4.1";
+            //add the dreamland dependency if the user has selected to use dreamland
+            if (dreamland === true) {
+                packageJSON.devDependencies["dreamland"] = "^0.0.24";
+            }
             const sortedPackageJSON = sortPackageJson(packageJSON);
             fs.writeJSONSync(`${name}/package.json`, sortedPackageJSON, {
                 spaces: 2
@@ -85,9 +97,18 @@ async function template(template: string, name: string, dreamland: boolean, lice
             });
             //only move the necessary files
             fs.moveSync(`${name}/ts/server.ts`, `${name}/server.ts`);
-            console.log(dreamland);
+            fs.moveSync(`${name}/ts/types/`, `${name}/src/types/`);
             if (!dreamland) {
+                //Move specific NON ts files
                 fs.moveSync(`${name}/ts/tsconfig.json`, `${name}/tsconfig.json`);
+                fs.moveSync(`${name}/ts/index.ts`, `${name}/src/index.ts`);
+                fs.moveSync(`${name}/ts/index.html`, `${name}/src/index.html`);
+            }
+            if (dreamland) {
+                //Move specific dreamland files
+                fs.moveSync(`${name}/dreamland/tsconfig.json`, `${name}/tsconfig.json`);
+                fs.moveSync(`${name}/dreamland/index.tsx`, `${name}/src/index.tsx`);
+                fs.moveSync(`${name}/dreamland/index.html`, `${name}/src/index.html`);
             }
             fs.rmSync(`${name}/ts/`, { recursive: true });
         }

@@ -39,10 +39,10 @@ async function project() {
     program.description('Quickly scaffold an anura application');
     program.argument('[dir]', 'The name of the project, and the directory to create');
     program.option('--git', 'Init a Git repository', false);
-    program.option('-i, --install', 'Automatically install the dependencies');
+    program.option('-i, --install', 'Automatically install the dependencies', false);
     program.option('-y, --default', 'Skip everything and bootstrap with defaults', false);
     program.option('-p, --projectType <ts|js>', 'The project type');
-    program.option('-d, --dreamland', 'Whether to use dreamland.js or not');
+    program.option('-d, --dreamland', 'Whether to use dreamland.js or not', false);
     program.option('-a, --author <author>', "The author's name", "billy");
     program.option('-l, --license <license>', 'The license you want to use');
     program.parse(process.argv);
@@ -113,7 +113,7 @@ async function project() {
                         ]
                     })
             }),
-            ...(cliResults.flags.install === undefined && {
+            ...(!cliResults.flags.install && {
                 install: () =>
                     prompt.confirm({
                         message: chalk.magentaBright(
@@ -122,7 +122,7 @@ async function project() {
                         initialValue: false
                     })
             }),
-            ...(cliResults.flags.dreamland === undefined && {
+            ...(!cliResults.flags.dreamland && {
                 dreamland: () =>
                     prompt.confirm({
                         message: chalk.green('Do you want to use dreamland.js?'),
