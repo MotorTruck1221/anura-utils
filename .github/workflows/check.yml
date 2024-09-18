@@ -17,12 +17,12 @@ jobs:
           repository: 'mercuryworkshop/anuraos'
           submodules: 'recursive'
           ref: 'v2.0'
+          path: 'anuraos'
 
       - name: Checkout my repo
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
-          path: 'create-anura-app'
 
       - name: Install other silly deps
         run: sudo apt update && sudo apt install inotify-tools binaryen wget make gcc uuid-runtime jq
@@ -53,6 +53,7 @@ jobs:
       - name: Check for new commits
         run: |
           bash
+          cd ..anuraos/
           output=$(git log --since="2 days ago")
           if [[ -n "$output" ]]; then
             echo "New commits! Generating new template files....."
