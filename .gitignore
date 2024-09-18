@@ -9,3 +9,5 @@ anuraos/
 !**/anura_env/**
 !**/anura_env/
 !anura_env/
+**/.turbo/
+.turbo/
