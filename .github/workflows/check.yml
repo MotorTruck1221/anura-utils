@@ -53,7 +53,7 @@ jobs:
       - name: Check for new commits
         run: |
           bash
-          cd ..anuraos/
+          ls
           output=$(git log --since="2 days ago")
           if [[ -n "$output" ]]; then
             echo "New commits! Generating new template files....."
