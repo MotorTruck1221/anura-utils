@@ -33,3 +33,6 @@
 3. Run `pnpm run build` build the create anura app files.
 4. `node create-anura-app/dist/index.js` is your best friend.
 5. `test_project` is already gitignored, i'd recommend using that for the name when testing.
+
+
+###### Everything in this repo is licensed under the [MIT](./LICENSE) license unless otherwise specified.
