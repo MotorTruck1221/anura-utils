@@ -8,24 +8,64 @@ on:
 jobs:
   check_new_commits:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
     steps:
       - uses: actions/checkout@v4
         with:
           repository: 'mercuryworkshop/anuraos'
           submodules: 'recursive'
           ref: 'v2.0'
+
       - name: Checkout my repo
         uses: actions/checkout@v4
         with:
           submodules: 'recursive'
           path: 'create-anura-app'
+
+      - name: Install other silly deps
+        run: sudo apt update && sudo apt install inotify-tools binaryen wget make gcc uuid-runtime jq
+      
+      - name: Setup Rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          toolchain: nightly
+          target: wasm32-unknown-unknown
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: oracle
+          java-version: 21
+
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9.9.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: "pnpm"
+
       - name: Check for new commits
         run: |
           bash
           output=$(git log --since="2 days ago")
           if [[ -n "$output" ]]; then
-            ls ../
             echo "New commits! Generating new template files....."
+            cd ../create-anura-app/
+            make all
+            git add .
+            git commit -m "Update templates with newer files..." --author="create-anura-app[bot] <example@example.com>"
           else
             echo "No output, exiting"
           fi
+
+      - name: Push said commits
+        uses: ad-m/github-push-action@master
+        with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: main
