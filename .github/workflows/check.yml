@@ -16,6 +16,7 @@ jobs:
       - name: Check for new commits
         run: |
           bash
+          ls
           output=$(git log --since="2 days ago")
           if [[ -n "$output" ]]; then
             echo "new commits! Generating new template files....."
