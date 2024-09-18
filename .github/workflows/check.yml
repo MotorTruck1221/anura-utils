@@ -12,19 +12,19 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - name: My repo
-        uses: actions/checkout@v4
-        with:
-            submodules: 'recursive'
-            path: 'main'
-
       - name: Checkout anura
         uses: actions/checkout@v4
         with:
           repository: 'mercuryworkshop/anuraos'
           submodules: 'recursive'
           ref: 'v2.0'
-          path: 'anuraos' 
+          path: 'anuraos'
+
+      - name: My repo
+        uses: actions/checkout@v4
+        with:
+            submodules: 'recursive'
+            path: 'main' 
 
       - name: Install other silly deps
         run: sudo apt update && sudo apt install inotify-tools binaryen wget make gcc uuid-runtime jq
