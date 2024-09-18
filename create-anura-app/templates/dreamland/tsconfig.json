@@ -1,28 +1,28 @@
 {
-  "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "skipLibCheck": true,
-    "allowJs": true,
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
-
-    "jsx": "react",
-    "jsxFactory": "h",
-    "jsxFragmentFactory": "Fragment",
-    "types": ["dreamland"],
-  },
-  "exclude": ["/**/node_modules/**/*"],
-  "include": ["*", "./src/**/*.ts", "./src/**/*.json", "./src/**/*.tsx"]
+    "compilerOptions": {
+        "allowJs": true,
+        "allowUnreachableCode": false,
+        "alwaysStrict": true,
+        "checkJs": false,
+        "declaration": true,
+        "esModuleInterop": true,
+        "module": "ESNext",
+        "lib": ["ESNext", "dom"],
+        "moduleResolution": "Bundler",
+        "noImplicitAny": true,
+        "noUncheckedIndexedAccess": true,
+        "outDir": "./dist/",
+        "skipLibCheck": true,
+        "sourceMap": true,
+        "sourceRoot": "./dist/",
+        "strictNullChecks": true,
+        "target": "ESNext",
+        "resolveJsonModule": true,
+        "jsx": "react",
+        "jsxFactory": "h",
+        "jsxFragmentFactory": "Fragment",
+        "types": ["dreamland"],
+    },
+    "exclude": ["/**/node_modules/**/*"],
+    "include": ["*", "./src/**/*.json", "./src/**/*.ts", "./scripts/**/*.js"]
 }
