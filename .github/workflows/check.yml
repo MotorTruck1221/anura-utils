@@ -15,6 +15,7 @@ jobs:
           submodules: 'recursive'
           ref: 'v2.0'
       - name: Checkout my repo
+        uses: actions/checkout@v4
         with:
           submodules: 'recursive'
           path: 'create-anura-app'
