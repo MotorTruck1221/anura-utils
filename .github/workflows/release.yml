@@ -35,6 +35,9 @@ jobs:
           toolchain: nightly
           target: wasm32-unknown-unknown
 
+      - name: Make anura
+        run: make
+
       - name: Setup PNPM
         uses: pnpm/action-setup@v3
         with:
