@@ -35,9 +35,6 @@ jobs:
           toolchain: nightly
           target: wasm32-unknown-unknown
 
-      - name: Make anura
-        run: make
-
       - name: Setup PNPM
         uses: pnpm/action-setup@v3
         with:
@@ -48,6 +45,9 @@ jobs:
         with:
           node-version: 18
           cache: "pnpm"
+
+      - name: Make anura
+        run: make
 
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
