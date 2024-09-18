@@ -3,15 +3,17 @@ import chalk from 'chalk';
 import { Command } from 'commander';
 import { execa } from 'execa';
 import { scaffold } from './scaffold.js';
+import { detect as whichPM } from "detect-package-manager";
 
 interface CliFlags {
     git: boolean;
     install: boolean | undefined;
     default: boolean;
     projectType: string;
-    dreamland: boolean | undefined;
+    dreamland: boolean;
     author: string;
     license: string;
+    packageManager?: "npm" | "pnpm" | "yarn" | "bun";
 }
 
 interface CliResults {
@@ -26,13 +28,14 @@ const defaultOpts: CliResults = {
         install: undefined,
         default: false,
         projectType: 'ts',
-        dreamland: undefined,
+        dreamland: false,
         author: '',
         license: 'MIT'
     }
 };
 
 async function project() {
+    let failedInstall = false;
     const cliResults = defaultOpts;
     const program = new Command();
     program.name('Create Anura App');
@@ -45,6 +48,7 @@ async function project() {
     program.option('-d, --dreamland', 'Whether to use dreamland.js or not', false);
     program.option('-a, --author <author>', "The author's name", "billy");
     program.option('-l, --license <license>', 'The license you want to use');
+    program.option('-pm --packageManager <npm|pnpm|yarn|bun>', 'The package manager you would like to use');
     program.parse(process.argv);
     const providedName = program.args[0];
     if (providedName) {
@@ -122,7 +126,7 @@ async function project() {
                         initialValue: false
                     })
             }),
-            ...(!cliResults.flags.dreamland && {
+            ...(!cliResults.flags.dreamland && !cliResults.flags.projectType && {
                 dreamland: () =>
                     prompt.confirm({
                         message: chalk.green('Do you want to use dreamland.js?'),
@@ -205,7 +209,38 @@ async function project() {
         license: questions.license ?? cliResults.flags.license,
         author: questions.author ?? cliResults.flags.author
     });
-    spinner.stop();
+    if (cliResults.flags.git === true) {
+        spinner.message(chalk.yellow('Initializing Git repo'));
+        try {
+            await execa('git', [ 'init' ], { cwd: questions.path ?? cliResults.dir });
+            await execa('git', [ 'add', '-A' ], { cwd: questions.path ?? cliResults.dir });
+            await execa('git', [ 'commit', '-m', 'Initial commit from Create anura app', '--author="create-anura-app[bot] <example@example.com>"' ], { cwd: cliResults.dir });
+        } catch (err: any) {
+            spinner.message(chalk.red('Initialization of the git repo failed, you will have to do it manually'));
+        }
+    }
+    if (cliResults.flags.install === true) {
+        spinner.message(chalk.yellow('Installing dependencies'));
+        whichPM().then(async (pm) => {
+            console.log(chalk.blue(`Using ${cliResults.flags.packageManager ? cliResults.flags.packageManager : pm} to install dependencies...`));
+            try {
+                await execa(cliResults.flags.packageManager ? cliResults.flags.packageManager : pm, ['install'], { cwd: questions.path ?? cliResults.dir });
+            } catch (err: any) {
+                spinner.message(chalk.red('Install failed trying again with npm'));
+                try { await execa('npm', [ 'install' ], { cwd: questions.path ?? cliResults.dir }) } 
+                catch (err: any) { spinner.message(chalk.red('Install failed, you will have to manually install dependencies')); failedInstall = true; }
+            }
+        });
+    }
+    spinner.stop(chalk.green.bold('Scaffold complete'));
+    whichPM().then(async (pm) => {
+        if (cliResults.flags.install !== true || failedInstall === true) {
+            prompt.note(`cd ${questions.path ?? cliResults.dir} \n${cliResults.flags.packageManager ? cliResults.flags.packageManager : pm} install \n${cliResults.flags.packageManager ? cliResults.flags.packageManager : pm} run dev \nAnd have fun!`, chalk.bold.magenta('Done. Now Do:'))
+        }
+        else {
+            prompt.note(`cd ${questions.path ?? cliResults.dir} \nAnd have fun!`, chalk.bold.magenta('Done. Now Do:'));
+        }
+    })
 }
 
 async function cli() {

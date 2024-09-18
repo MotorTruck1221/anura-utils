@@ -6,7 +6,8 @@
             ".github/**",
             "anuraos/**",
             "create-anura-app/templates/base/anura_env/**",
-            "create-anura-app/templates/ts/types/**"
+            "create-anura-app/templates/ts/types/**",
+            "anura-types/**"
         ],
         "include": ["create-anura-app/src/**", "*"]
     },
