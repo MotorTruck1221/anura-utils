@@ -10,7 +10,8 @@
       "version": "changeset version",
       "preinstall": "npx -y only-allow pnpm"
   },
-  "author": "",
+  "author": "MotorTruck1221",
+  "packageManager": "^pnpm@9.9.0",
   "license": "MIT",
   "dependencies": {
     "create-anura-app": "workspace:*"

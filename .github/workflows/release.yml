@@ -35,6 +35,12 @@ jobs:
           toolchain: nightly
           target: wasm32-unknown-unknown
 
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: oracle
+          java-version: 21
+
       - name: Setup PNPM
         uses: pnpm/action-setup@v3
         with:
