@@ -1,0 +1,24 @@
+name: Check for new commits in the upstream repo
+
+on:
+  schedule:
+    - cron: "2 2 */2 * *"
+  workflow_dispatch:
+
+jobs:
+  check_new_commits:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: 'https://github.com/mercuryworkshop/anuraos'
+          submodules: 'recursive'
+      - name: Check for new commits
+        run: |
+          bash
+          output=$(git log --since="2 days ago")
+          if [[ -n "$output" ]]; then
+            echo "new commits! Generating new template files....."
+          else
+            echo "No output, exiting"
+          fi
