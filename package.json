@@ -3,15 +3,21 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+      "format": "pnpm run format:code && pnpm run format:imports",
+      "format:code": "biome format ./ --write",
+      "format:imports": "biome check --apply .",
+      "build": "turbo build",
+      "version": "changeset version",
+      "preinstall": "npx -y only-allow pnpm"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-      "create-anura-app": "workspace:*"
+    "create-anura-app": "workspace:*"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.8.3",
-    "@changesets/cli": "^2.27.7"
+    "@changesets/cli": "^2.27.7",
+    "turbo": "^2.1.2"
   }
 }
