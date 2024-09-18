@@ -21,7 +21,7 @@
     "linter": { "enabled": false },
     "javascript": {
         "formatter": {
-            "trailingComma": "none",
+            "trailingCommas": "none",
             "quoteStyle": "single",
             "semicolons": "always"
         }

@@ -1,17 +1,17 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "tasks": {
-    "types": {
-        "dependsOn": ["^types"]
-    },
-    "build": {
-        "dependsOn": ["^build", "types"],
-        "outputs": ["dist"]
-    },
-    "lint": {},
-    "dev": {
-        "cache": false,
-        "persistent": true
+    "$schema": "https://turbo.build/schema.json",
+    "tasks": {
+        "types": {
+            "dependsOn": ["^types"]
+        },
+        "build": {
+            "dependsOn": ["^build", "types"],
+            "outputs": ["dist"]
+        },
+        "lint": {},
+        "dev": {
+            "cache": false,
+            "persistent": true
+        }
     }
-  }
 }

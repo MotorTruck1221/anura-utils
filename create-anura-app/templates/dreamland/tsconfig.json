@@ -21,7 +21,7 @@
         "jsx": "react",
         "jsxFactory": "h",
         "jsxFragmentFactory": "Fragment",
-        "types": ["dreamland"],
+        "types": ["dreamland"]
     },
     "exclude": ["/**/node_modules/**/*"],
     "include": ["*", "./src/**/*.json", "./src/**/*.ts", "./scripts/**/*.js", "./src/**/*.tsx"]

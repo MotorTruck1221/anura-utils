@@ -16,30 +16,37 @@ interface options {
 function filterPath(path: string) {
     if (path.endsWith('/')) {
         let newPath = path.slice(0, -1);
-        newPath = newPath.replace(/^.*\/([^/]*)$/, "$1");
+        newPath = newPath.replace(/^.*\/([^/]*)$/, '$1');
         return newPath.toLowerCase();
-    }
-    else {
-        const newPath = path.replace(/^.*\/([^/]*)$/, "$1");
+    } else {
+        const newPath = path.replace(/^.*\/([^/]*)$/, '$1');
         return newPath.toLowerCase();
     }
 }
 
-async function template(template: string, name: string, dreamland: boolean, license: string, author: string) {
+async function template(
+    template: string,
+    name: string,
+    dreamland: boolean,
+    license: string,
+    author: string
+) {
     try {
-        await downloadTemplate(`github:motortruck1221/create-anura-app/create-anura-app/templates/base`,
+        await downloadTemplate(
+            `github:motortruck1221/create-anura-app/create-anura-app/templates/base`,
             { force: false, provider: 'github', cwd: name, dir: '.' }
-        )
-        if (template === "js") {
-            await downloadTemplate(`github:motortruck1221/create-anura-app/create-anura-app/templates/${template}`,
+        );
+        if (template === 'js') {
+            await downloadTemplate(
+                `github:motortruck1221/create-anura-app/create-anura-app/templates/${template}`,
                 { force: false, provider: 'github', cwd: name, dir: 'js' }
-            )
+            );
             const packageJSON = fs.readJSONSync(`${name}/package.json`);
             const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
             //we need to filter out directory paths and stuff.
             const newName = filterPath(name);
             //add the "dev" script, edit the name correctly.
-            packageJSON.scripts.dev = "node server.js";
+            packageJSON.scripts.dev = 'node server.js';
             packageJSON.name = newName;
             packageJSON.license = license;
             const sortedPackageJSON = sortPackageJson(packageJSON);
@@ -59,31 +66,43 @@ async function template(template: string, name: string, dreamland: boolean, lice
             fs.moveSync(`${name}/js/example.js`, `${name}/src/example.js`);
             fs.rmSync(`${name}/js/`, { recursive: true });
         }
-        if (template === "ts") {
-            await downloadTemplate(`github:motortruck1221/create-anura-app/create-anura-app/templates/${template}`, {
-                force: false, provider: 'github', cwd: name, dir: 'ts' 
-            });
+        if (template === 'ts') {
+            await downloadTemplate(
+                `github:motortruck1221/create-anura-app/create-anura-app/templates/${template}`,
+                {
+                    force: false,
+                    provider: 'github',
+                    cwd: name,
+                    dir: 'ts'
+                }
+            );
             if (dreamland === true) {
                 //download the dreamland template as well if the user selected it.
-                await downloadTemplate(`github:motortruck1221/create-anura-app/create-anura-app/templates/dreamland`, {
-                    force: false, provider: 'github', cwd: name, dir: 'dreamland'
-                });
+                await downloadTemplate(
+                    `github:motortruck1221/create-anura-app/create-anura-app/templates/dreamland`,
+                    {
+                        force: false,
+                        provider: 'github',
+                        cwd: name,
+                        dir: 'dreamland'
+                    }
+                );
             }
             const packageJSON = fs.readJSONSync(`${name}/package.json`);
             const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
             const newName = filterPath(name);
             //add the correct "dev" script and dependencies
-            packageJSON.scripts.dev = "npm run build && node dist/server.js";
-            packageJSON.scripts.build = "tsc && copyfiles -u 1 src/**/*.html dist/src/";
-            packageJSON.scripts.package = "node dist/scripts/package.js";
+            packageJSON.scripts.dev = 'npm run build && node dist/server.js';
+            packageJSON.scripts.build = 'tsc && copyfiles -u 1 src/**/*.html dist/src/';
+            packageJSON.scripts.package = 'node dist/scripts/package.js';
             packageJSON.name = newName;
             packageJSON.license = license;
-            packageJSON.devDependencies["typescript"] = "^5.4.5";
-            packageJSON.devDependencies["@types/express"] = "^4.17.21";
-            packageJSON.devDependencies["copyfiles"] = "^2.4.1";
+            packageJSON.devDependencies['typescript'] = '^5.4.5';
+            packageJSON.devDependencies['@types/express'] = '^4.17.21';
+            packageJSON.devDependencies['copyfiles'] = '^2.4.1';
             //add the dreamland dependency if the user has selected to use dreamland
             if (dreamland === true) {
-                packageJSON.devDependencies["dreamland"] = "^0.0.24";
+                packageJSON.devDependencies['dreamland'] = '^0.0.24';
             }
             const sortedPackageJSON = sortPackageJson(packageJSON);
             fs.writeJSONSync(`${name}/package.json`, sortedPackageJSON, {
@@ -117,7 +136,7 @@ async function template(template: string, name: string, dreamland: boolean, lice
         }
     } catch (err: any) {
         //remove the dir if it's likely to be created by the CLI
-         if (name !== '.' && name !== './' && name.startsWith('../')) {
+        if (name !== '.' && name !== './' && name.startsWith('../')) {
             try {
                 fs.rmdirSync(name);
             } catch (_) {}

@@ -1,12 +1,12 @@
 {
-  "name": "anura-app",
-  "type": "auto",
-  "package": "creator.name",
-  "index": "index.html",
-  "icon": "",
-  "wininfo": {
-    "title": "anura-app",
-    "width": "800px",
-    "height": "600px"
-  }
+    "name": "anura-app",
+    "type": "auto",
+    "package": "creator.name",
+    "index": "index.html",
+    "icon": "",
+    "wininfo": {
+        "title": "anura-app",
+        "width": "800px",
+        "height": "600px"
+    }
 }
