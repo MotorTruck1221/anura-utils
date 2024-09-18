@@ -12,9 +12,11 @@ jobs:
       contents: write
       id-token: write
     steps:
-      - uses: actions/checkout@v4
+      - name: My repo
+        uses: actions/checkout@v4
         with:
             submodules: 'recursive'
+            path: 'main'
 
       - name: Checkout anura
         uses: actions/checkout@v4
