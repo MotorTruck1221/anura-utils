@@ -131,7 +131,7 @@ async function template(
                 await fs.move(`${name}/ts/tsconfig.json`, `${name}/tsconfig.json`);
                 await fs.move(`${name}/manifest.json`, `${name}/src/manifest.json`);
                 //required scripts
-                packageJSON.scripts.build = "tsc && copyfiles -u 1 src/manifest.json dist/";
+                packageJSON.scripts.build = "tsc && copyfiles -u 1 src/index.html dist/";
                 packageJSON.scripts.dev = "npm run build && tsx server.ts";
                 packageJSON.scripts.package = "node scripts/package.js";
             }
