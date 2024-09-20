@@ -1,6 +1,6 @@
 <div align="center">
          
-<img src="https://socialify.git.ci/motortruck1221/create-anura-app/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark" alt="ruby" width="640" height="320" />
+<img src="https://socialify.git.ci/motortruck1221/anura-utils/image?description=1&font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pattern=Circuit%20Board&pulls=1&stargazers=1&theme=Dark" alt="ruby" width="640" height="320" />
 
 <img alt="repo size" src="https://img.shields.io/github/repo-size/motortruck1221/create-anura-app?style=for-the-badge"></img>
 <img alt="commit a week" src="https://img.shields.io/github/commit-activity/w/motortruck1221/create-anura-app?style=for-the-badge"></img>
@@ -31,7 +31,7 @@
 1. Make sure you have those dependencies installed.
 2. Run `make` as this will build Anura & Rip the files for testing
 3. Run `pnpm run build` build the create anura app files.
-4. `node create-anura-app/dist/index.js` is your best friend.
+4. `node anura-utils/dist/index.js` is your best friend.
 5. `test_project` is already gitignored, i'd recommend using that for the name when testing.
 
 

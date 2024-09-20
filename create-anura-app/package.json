@@ -9,7 +9,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/MotorTruck1221/create-anura-app.git"
+        "url": "git+https://github.com/MotorTruck1221/anura-utils.git"
     },
     "scripts": {
         "format": "biome format ./ --write && biome check --apply .",
@@ -28,9 +28,9 @@
         "Percs (https://github.com/percslol)"
     ],
     "bugs": {
-        "url": "https://github.com/motortruck1221/create-anura-app/issues"
+        "url": "https://github.com/motortruck1221/anura-utils/issues"
     },
-    "homepage": "https://github.com/motortruck1221/create-anura-app",
+    "homepage": "https://github.com/motortruck1221/anura-utils",
     "license": "MIT",
     "devDependencies": {
         "@babel/cli": "^7.24.5",

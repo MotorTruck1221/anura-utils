@@ -34,12 +34,12 @@ async function template(
 ) {
     try {
         await downloadTemplate(
-            `github:motortruck1221/create-anura-app/create-anura-app/templates/base`,
+            `github:motortruck1221/anura-utils/create-anura-app/templates/base`,
             { force: false, provider: 'github', cwd: name, dir: '.' }
         );
         if (template === 'js') {
             await downloadTemplate(
-                `github:motortruck1221/create-anura-app/create-anura-app/templates/${template}`,
+                `github:motortruck1221/anura-utils/create-anura-app/templates/${template}`,
                 { force: false, provider: 'github', cwd: name, dir: 'js' }
             );
             const packageJSON = fs.readJSONSync(`${name}/package.json`);
@@ -69,7 +69,7 @@ async function template(
         }
         if (template === 'ts') {
             await downloadTemplate(
-                `github:motortruck1221/create-anura-app/create-anura-app/templates/${template}`,
+                `github:motortruck1221/anura-utils/create-anura-app/templates/${template}`,
                 {
                     force: false,
                     provider: 'github',
@@ -80,7 +80,7 @@ async function template(
             if (dreamland === true) {
                 //download the dreamland template as well if the user selected it.
                 await downloadTemplate(
-                    `github:motortruck1221/create-anura-app/create-anura-app/templates/dreamland`,
+                    `github:motortruck1221/anura-utils/create-anura-app/templates/dreamland`,
                     {
                         force: false,
                         provider: 'github',

@@ -2,7 +2,7 @@
     "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
     "changelog": [
         "@changesets/changelog-github",
-        { "repo": "motortruck1221/create-dreamland-app" }
+        { "repo": "motortruck1221/anura-utils" }
     ],
     "commit": false,
     "fixed": [],

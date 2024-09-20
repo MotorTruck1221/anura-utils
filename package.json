@@ -1,7 +1,7 @@
 {
-  "name": "create-anura",
+  "name": "anura-utils",
   "version": "1.0.0",
-  "description": "",
+  "description": "Utils pertaining to AnuraOS (create-anura-app & anura-types)",
   "scripts": {
       "format": "pnpm run format:code && pnpm run format:imports",
       "format:code": "biome format ./ --write",
