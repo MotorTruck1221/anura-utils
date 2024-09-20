@@ -88,7 +88,7 @@ async function template(
                         dir: 'dreamland'
                     }
                 );
-                //"scaffoldDreamland" is the function used to download the already made templates with dreamland. We just want to use them here.
+                //"scaffoldDreamland" is the function used to download the already made templates with dreamland (from: create-dreamland-app). We just want to use them here.
                 await scaffoldDreamland({
                     projectName: `${name}/dreamland/files`,
                     scaffoldType: 'tsx/jsx',
@@ -117,14 +117,24 @@ async function template(
                 packageJSON.devDependencies['dreamland'] = '^0.0.24';
                 packageJSON.devDependencies['vite'] = '^5.2.11';
                 packageJSON.devDependencies['vite-plugin-dreamland'] = '^1.2.0';
-                packageJSON.devDependencies['copyfiles'] = "^2.4.1";
-                packageJSON.scripts.build = "tsc && vite build";
-                packageJSON.scripts.dev = "npm run build && copyfiles -u 1 manifest.json dist/ && JSX=true tsx server.ts";
+                packageJSON.scripts.build = "tsc && vite build && copyfiles -u 1 src/manifest.json dist/";
+                packageJSON.scripts.dev = "npm run build && JSX=true tsx server.ts";
                 packageJSON.scripts.package = "JSX=true node scripts/package.js";
                 //cleanup
                 fs.rmSync(`${name}/dreamland/`, { recursive: true });
             }
-            else {}
+            else {
+                fs.rmSync(`${name}/src/`, { recursive: true });
+                fs.mkdirSync(`${name}/src/`);
+                await fs.move(`${name}/ts/index.html`, `${name}/src/index.html`);
+                await fs.move(`${name}/ts/index.ts`, `${name}/src/index.ts`);
+                await fs.move(`${name}/ts/tsconfig.json`, `${name}/tsconfig.json`);
+                await fs.move(`${name}/manifest.json`, `${name}/src/manifest.json`);
+                //required scripts
+                packageJSON.scripts.build = "tsc && copyfiles -u 1 src/manifest.json dist/";
+                packageJSON.scripts.dev = "npm run build && tsx server.ts";
+                packageJSON.scripts.package = "node scripts/package.js";
+            }
             //add the other neccessary files back
             await fs.move(`${name}/types/`, `${name}/src/types/`);
             await fs.rm(`${name}/ts/`, { recursive: true });
@@ -132,6 +142,7 @@ async function template(
             packageJSON.devDependencies['typescript'] = '^5.4.5';
             packageJSON.devDependencies['@types/express'] = '^4.17.21';
             packageJSON.devDependencies['tsx'] = "^4.19.1";
+            packageJSON.devDependencies['copyfiles'] = "^2.4.1";
             const sortedPackageJSON = sortPackageJson(packageJSON);
             fs.writeJSONSync(`${name}/package.json`, sortedPackageJSON, {
                 spaces: 2
