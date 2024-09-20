@@ -12,7 +12,7 @@ app.use(
 app.use(
     express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), './anura_env/build/'))
 );
-if (process.env === "TSX/JSX") {
+if (process.env.JSX === "true") {
     app.use('/__mnt', express.static(path.join(path.dirname(fileURLToPath(import.meta.url)), 'dist/')));
 }
 else {

@@ -32,7 +32,7 @@ archive.on('error', function (err) {
 });
 
 archive.pipe(output);
-if (process.env === "TSX/JSX") {
+if (process.env.JSX === "true") {
     archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), '../dist'), false);
 }
 else {

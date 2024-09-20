@@ -1,3 +1,5 @@
+import "dreamland/dev";
+
 const Example: Component<{ picker: any; files?: string[] }, {}> = function () {
     this.files ??= [];
     return (
@@ -20,6 +22,6 @@ const Example: Component<{ picker: any; files?: string[] }, {}> = function () {
 
 window.addEventListener('load', () => {
     anura.import('anura.filepicker').then((picker: any) => {
-        document.body.appendChild(<Example picker={picker} />);
+        document.getElementById('app')!.replaceWith(<Example picker={picker} />);
     });
 });
