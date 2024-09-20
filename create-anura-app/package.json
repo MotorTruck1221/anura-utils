@@ -40,7 +40,9 @@
         "@types/fs-extra": "^11.0.4",
         "@types/node": "^20.16.2",
         "detect-package-manager": "^3.0.2",
-        "typescript": "^5.4.5"
+        "typescript": "^5.4.5",
+        "create-dreamland-app": "^1.0.6",
+        "glob": "^11.0.0"
     },
     "dependencies": {
         "@clack/core": "^0.3.4",

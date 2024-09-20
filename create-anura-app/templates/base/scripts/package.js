@@ -32,5 +32,10 @@ archive.on('error', function (err) {
 });
 
 archive.pipe(output);
-archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), '../src'), false);
+if (process.env === "TSX/JSX") {
+    archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), '../dist'), false);
+}
+else {
+    archive.directory(path.join(path.dirname(fileURLToPath(import.meta.url)), '../src'), false);
+}
 archive.finalize();

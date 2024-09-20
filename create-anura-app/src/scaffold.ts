@@ -4,6 +4,7 @@ import chalk from 'chalk';
 import fs from 'fs-extra';
 import { downloadTemplate } from 'giget';
 import sortPackageJson from 'sort-package-json';
+import { scaffold as scaffoldDreamland }  from "create-dreamland-app/dist/scaffold.js";
 
 interface options {
     projectName: string;
@@ -87,51 +88,31 @@ async function template(
                         dir: 'dreamland'
                     }
                 );
+                //"scaffoldDreamland" is the function used to download the already made templates with dreamland. We just want to use them here.
+                await scaffoldDreamland({
+                    projectName: `${name}/dreamland/files`,
+                    scaffoldType: 'tsx/jsx',
+                    tsScaffold: true
+                });
             }
-            const packageJSON = fs.readJSONSync(`${name}/package.json`);
-            const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
-            const newName = filterPath(name);
-            //add the correct "dev" script and dependencies
-            packageJSON.scripts.dev = 'npm run build && node dist/server.js';
-            packageJSON.scripts.build = 'tsc && copyfiles -u 1 src/**/*.html dist/src/';
-            packageJSON.scripts.package = 'node dist/scripts/package.js';
-            packageJSON.name = newName;
-            packageJSON.license = license;
-            packageJSON.devDependencies['typescript'] = '^5.4.5';
-            packageJSON.devDependencies['@types/express'] = '^4.17.21';
-            packageJSON.devDependencies['copyfiles'] = '^2.4.1';
-            //add the dreamland dependency if the user has selected to use dreamland
-            if (dreamland === true) {
-                packageJSON.devDependencies['dreamland'] = '^0.0.24';
-            }
-            const sortedPackageJSON = sortPackageJson(packageJSON);
-            fs.writeJSONSync(`${name}/package.json`, sortedPackageJSON, {
-                spaces: 2
-            });
-            manifest.name = newName;
-            manifest.package = `${author.toLowerCase()}.${newName}`;
-            manifest.wininfo.title = newName;
-            fs.writeJSONSync(`${name}/src/manifest.json`, manifest, {
-                spaces: 2
-            });
-            //only move the necessary files
-            fs.moveSync(`${name}/ts/server.ts`, `${name}/server.ts`);
-            fs.moveSync(`${name}/ts/types/`, `${name}/src/types/`);
-            if (!dreamland) {
-                //Move specific NON ts files
-                fs.moveSync(`${name}/ts/tsconfig.json`, `${name}/tsconfig.json`);
-                fs.moveSync(`${name}/ts/index.ts`, `${name}/src/index.ts`);
-                fs.moveSync(`${name}/ts/index.html`, `${name}/src/index.html`);
-            }
+            //move the necessary files out of the ts/ folder
+            await fs.move(`${name}/ts/server.ts`, `${name}/server.ts`);
+            await fs.move(`${name}/ts/types/`, `${name}/types/`);
+            await fs.move(`${name}/src/manifest.json`, `${name}/manifest.json`);
+            //specific files to ONLY dreamland
             if (dreamland) {
-                //Move specific dreamland files
-                fs.moveSync(`${name}/dreamland/tsconfig.json`, `${name}/tsconfig.json`);
-                fs.moveSync(`${name}/dreamland/index.tsx`, `${name}/src/index.tsx`);
-                fs.moveSync(`${name}/dreamland/index.html`, `${name}/src/index.html`);
-            }
-            fs.rmSync(`${name}/ts/`, { recursive: true });
-            if (dreamland === true) {
-                fs.rmSync(`${name}/dreamland/`, { recursive: true });
+                fs.rmSync(`${name}/src/`, { recursive: true });
+                fs.mkdirSync(`${name}/src/`);
+                await fs.move(`${name}/dreamland/files/index.html`, `${name}/index.html`);
+                await fs.move(`${name}/dreamland/files/src/index.css`, `${name}/src/index.css`);
+                await fs.move(`${name}/dreamland/main.tsx`, `${name}/src/main.tsx`);
+                await fs.move(`${name}/dreamland/files/src/vite-env.d.ts`, `${name}/src/vite-env.d.ts`);
+                await fs.move(`${name}/dreamland/files/tsconfig.json`, `${name}/tsconfig.json`);
+                await fs.move(`${name}/dreamland/files/vite.config.ts`, `${name}/vite.config.ts`);
+                await fs.move(`${name}/manifest.json`, `${name}/src/manifest.json`);
+                await fs.move(`${name}/types/`, `${name}/src/types/`);
+                //cleanup
+                fs.rmSync(`${name}/dreamland/`, { recursive: true })
             }
         }
     } catch (err: any) {
