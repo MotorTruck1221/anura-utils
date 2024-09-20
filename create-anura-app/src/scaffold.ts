@@ -95,6 +95,9 @@ async function template(
                     tsScaffold: true
                 });
             }
+            const packageJSON = fs.readJSONSync(`${name}/package.json`);
+            const manifest = fs.readJSONSync(`${name}/src/manifest.json`);
+            const newName = filterPath(name);
             //move the necessary files out of the ts/ folder
             await fs.move(`${name}/ts/server.ts`, `${name}/server.ts`);
             await fs.move(`${name}/ts/types/`, `${name}/types/`);
@@ -110,10 +113,31 @@ async function template(
                 await fs.move(`${name}/dreamland/files/tsconfig.json`, `${name}/tsconfig.json`);
                 await fs.move(`${name}/dreamland/files/vite.config.ts`, `${name}/vite.config.ts`);
                 await fs.move(`${name}/manifest.json`, `${name}/src/manifest.json`);
-                await fs.move(`${name}/types/`, `${name}/src/types/`);
+                //add the required packages (only to dreamland)
+                packageJSON.devDependencies['dreamland'] = '^0.0.24';
+                packageJSON.devDependencies['vite'] = '^5.2.11';
+                packageJSON.devDependencies['vite-plugin-dreamland'] = '^1.2.0';
                 //cleanup
-                fs.rmSync(`${name}/dreamland/`, { recursive: true })
+                fs.rmSync(`${name}/dreamland/`, { recursive: true });
             }
+            else {}
+            //add the other neccessary files back
+            await fs.move(`${name}/types/`, `${name}/src/types/`);
+            //add all of the neccessary packages.
+            packageJSON.devDependencies['typescript'] = '^5.4.5';
+            packageJSON.devDependencies['@types/express'] = '^4.17.21';
+            packageJSON.devDependencies['tsx'] = "^4.19.1";
+            const sortedPackageJSON = sortPackageJson(packageJSON);
+            fs.writeJSONSync(`${name}/package.json`, sortedPackageJSON, {
+                spaces: 2
+            });
+            //update the manifest
+            manifest.name = newName;
+            manifest.package = `${author.toLowerCase()}.${newName}`;
+            manifest.wininfo.title = newName;
+            fs.writeJSONSync(`${name}/src/manifest.json`, manifest, {
+                spaces: 2
+            });
         }
     } catch (err: any) {
         //remove the dir if it's likely to be created by the CLI
