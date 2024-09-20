@@ -3,6 +3,7 @@
     "version": "2.0.0",
     "description": "Quickly scaffold an anura application",
     "type": "module",
+    "private": "true",
     "bin": {
         "create-anura-app": "dist/index.js"
     },
