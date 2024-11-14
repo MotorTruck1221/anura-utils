@@ -51,10 +51,6 @@ jobs:
         with:
           node-version: 22
           cache: "pnpm"
-
-      - name: Make anura
-        run: make
-
       - name: Install dependencies
         run: pnpm install --no-frozen-lockfile
 
