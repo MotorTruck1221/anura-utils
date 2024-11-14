@@ -11,7 +11,7 @@ clean:
 
 anura:
 	@echo "Building anura & adding the proper assets..."
-	@-[ ! -e 'anuraos' ] && git clone -b v2.0 --recursive https://github.com/mercuryworkshop/anuraos
+	@-[ ! -e 'anuraos' ] && git clone --recursive https://github.com/mercuryworkshop/anuraos
 	@cd anuraos && make all && cd -
 	@rm -rf create-anura-app/templates/base/anura_env/
 	@mkdir -p create-anura-app/templates/base/anura_env/
